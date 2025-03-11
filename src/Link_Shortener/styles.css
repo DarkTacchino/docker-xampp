@@ -6,7 +6,8 @@
     padding: 0; /* Rimuove il padding predefinito */
     box-sizing: border-box; /* Imposta il box model in modo che larghezza e altezza includano il padding e il bordo */
     font-family: 'Poppins', sans-serif; /* Applica il font Poppins a tutto il documento */
-}
+}    
+
 
 /* Stili per il corpo della pagina */
 body {
