@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Dark mode */
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
+        #chatContainer {
+            width: 500px;
+            margin: 50px auto;
+            background-color: #1c1c1c; /* Dark container */
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            overflow: hidden;
+        }
+        /* Titolo "Chat Room" simile a WhatsApp, senza sottolineatura al passaggio del mouse */
+        #chatTitle {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00bfae; /* WhatsApp color */
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+        #chatTitle:hover {
+            color: #00796b; /* Colore più scuro quando ci passi sopra */
+        }
+        /* Contenitore dei messaggi */
+        #messagesContainer {
+            max-height: 350px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        /* Contenitore di ogni messaggio */
+        .messageContainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #2c2c2c; /* Messaggio scuro */
+            border-radius: 8px;
+            color: #e0e0e0;
+        }
+        /* Testo del messaggio */
+        .messageText {
+            margin-right: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background-color: #333; /* Fondo dei messaggi */
+            word-wrap: break-word;
+        }
+        .messageText.self {
+            background-color: #00bfae;
+            color: white;
+            margin-left: auto;
+        }
+        /* Data del messaggio */
+        .messageDate {
+            color: #777;
+            font-size: 12px;
+            text-align: right; /* Data allineata a destra */
+            white-space: nowrap;
+        }
+        #chatForm {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #chatForm input[type="text"] {
+            width: 80%;
+            padding: 12px;
+            border: none;
+            border-radius: 30px;
+            background-color: #333;
+            color: #e0e0e0;
+            transition: .3s ease;
+        }
+        #chatForm input[type="text"]:hover {
+            box-shadow: 0 0 5px #00bfae; /* Effetto glow */
+        }
+        #chatForm input[type="submit"] {
+            padding: 12px 20px;
+            background-color: #00bfae;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #chatForm input[type="submit"]:hover {
+            background-color: #00796b;
+            box-shadow: 0 0 10px #00bfae, 0 0 15px #00796b;
+        }
+    </style>
+</head>
+<body>
+    <div id="chatContainer">
+        <!-- Titolo "Chat Room" che ti indirizza alla pagina room.html -->
+        <div id="chatTitle" onclick="window.location.href='room.html'">Chat Room</div>
+
+        <div id="messagesContainer"></div> <!-- Container per i messaggi -->
+
+        <form id="chatForm">
+            <input type="hidden" id="roomId" name="roomId"> <!-- Campo nascosto per l'ID stanza -->
+            <input type="text" id="messaggio" name="messaggio" placeholder="Scrivi messaggio..." required>
+            <input type="submit" value="Invia">
+        </form>
+    </div>
+
+    <script>
+        // Funzione per ottenere il parametro "id" dall'URL
+        function getRoomIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get("id");
+        }
+
+        // Ottieni l'ID della stanza
+        const targetRoomId = getRoomIdFromUrl();
+
+        // Se l'ID della stanza esiste, impostalo nel campo nascosto
+        if (targetRoomId) {
+            document.getElementById('roomId').value = targetRoomId;
+            loadMessages(targetRoomId);
+        }
+
+        // Funzione per caricare i messaggi dalla stanza
+        function loadMessages(roomId) {
+            const formData = new FormData();
+            formData.append('action', 'getmessaggi');
+            formData.append('roomId', roomId);
+
+            fetch('chat.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messagesContainer = document.getElementById('messagesContainer');
+                messagesContainer.innerHTML = ''; // Pulisce il contenitore dei messaggi
+                data.forEach(message => {
+                    const messageContainer = document.createElement('div');
+                    messageContainer.classList.add('messageContainer');
+
+                    const messageText = document.createElement('span');
+                    messageText.classList.add('messageText');
+                    messageText.innerHTML = `${message.username}: ${message.testo}`;
+                    
+                    const messageDate = document.createElement('span');
+                    messageDate.classList.add('messageDate');
+                    messageDate.innerHTML = `${message.data}`;
+
+                    messageContainer.appendChild(messageText);
+                    messageContainer.appendChild(messageDate);
+                    messagesContainer.appendChild(messageContainer);
+                });
+                // Scroll down per vedere l'ultimo messaggio
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            })
+            .catch(error => console.error('Errore nel recupero dei messaggi:', error));
+        }
+
+        // Funzione per inviare un messaggio
+        document.getElementById('chatForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            formData.append('action', 'invia');
+            formData.append('messaggio', document.getElementById('messaggio').value);
+            formData.append('roomId', document.getElementById('roomId').value);
+
+            fetch('chat.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Se il messaggio è stato inviato con successo, carica i messaggi aggiornati
+                if (data.status === 'success') {
+                    loadMessages(targetRoomId); // Ricarica i messaggi
+                    document.getElementById('messaggio').value = ''; // Pulisce il campo messaggio
+                }
+            })
+            .catch(error => console.error('Errore nell\'invio del messaggio:', error));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+/* Importiamo il font "Poppins" da Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,400&display=swap');
+
+/* Definiamo una variabile CSS per il colore principale */
+:root {
+    --clr: #FF1493; /* Colore rosa brillante */
+}
+
+/* Reset generale per tutti gli elementi */
+* {
+    margin: 0; /* Rimuove il margine predefinito */
+    padding: 0; /* Rimuove il padding predefinito */
+    box-sizing: border-box; /* Imposta il box model in modo che larghezza e altezza includano il padding e il bordo */
+    font-family: 'Poppins', sans-serif; /* Applica il font Poppins a tutto il documento */
+}
+
+/* Stili per il corpo della pagina */
+body {
+    height: 100vh;
+    background: #222;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #fff;
+    font-size: 1.4vw; /* Imposta la dimensione del testo */
+    transform: scale(0.3); /* Applica uno scalinamento iniziale */
+    font-weight: fit-content; /* Adatta la larghezza al contenuto */
+    position: absolute; /* Permette di spostarlo */
+    top: -25px; /* Distanza dall'alto */
+    left: -287px; /* Distanza da sinistra */
+    padding: 0;
+}
+
+h2 span {
+    position: relative;
+    color: rgba(255, 255, 255, 0.1);
+    animation: animate 16s infinite;
+    animation-delay: calc(-4s * var(--i));
+}
+
+
+/* Stili per il titolo h2 */
+h2 {
+    color: #fff; /* Imposta il colore del testo bianco */
+    padding: 0 100px; /* Aggiunge spazio ai lati */
+    font-size: 5em; /* Imposta una dimensione grande del testo */
+    font-weight: 600; /* Imposta un peso più marcato per il font */
+    display: flex; /* Usa flexbox per gestire la disposizione dei suoi figli */
+    gap: 10px; /* Aggiunge uno spazio tra gli elementi interni */
+}
+
+/* Stili per gli elementi span animati all'interno di h2 */
+h2 span {
+    position: relative; /* Imposta una posizione relativa per poter gestire il posizionamento dei suoi pseudo-elementi */
+    color: rgba(255, 255, 255, 0.1); /* Imposta il colore semi-trasparente */
+    animation: animate 8s infinite; /* Applica l'animazione "animate" con durata di 12s in loop infinito */
+    animation-delay: calc(-4s * var(--i)); /* Calcola il ritardo per ogni span in base al valore della variabile --i */
+}
+
+/* Definizione dell'animazione "animate" */
+@keyframes animate {
+    0% {
+        display: inline-block; /* All'inizio, il testo è visibile */
+    }
+    50%, 100% {
+        display: none; /* Dopo un terzo dell'animazione, il testo scompare */
+    }
+}
+
+/* Stili per l'effetto di scrittura simulata */
+h2 span::before {
+    content: attr(data-text); /* Usa il contenuto dell'attributo data-text come testo */
+    position: absolute; /* Posiziona il testo sopra lo span */
+    top: 0; /* Allinea il testo alla parte superiore */
+    left: 0; /* Allinea il testo a sinistra */
+    width: 100%; /* Imposta la larghezza massima */
+    overflow: hidden; /* Nasconde il testo che esce fuori dal contenitore */
+    color: var(--clr); /* Usa il colore definito nella variabile */
+    border-right: 4px solid var(--clr); /* Aggiunge un effetto cursore lampeggiante */
+    filter: drop-shadow(0 0 6px) drop-shadow(0 0 25px); /* Applica un'ombra luminosa al testo */
+    animation: animate2 4s linear infinite; /* Applica l'animazione di scrittura */
+}
+
+/* Definizione dell'animazione "animate2" per l'effetto di scrittura */
+@keyframes animate2 {
+    0%, 100% {
+        width: 0; /* All'inizio e alla fine, il testo è invisibile */
+    }
+    70%, 90% {
+        width: 100%; /* Durante il 70-90% del ciclo, il testo è completamente visibile */
+    }
+}

@@ -2,7 +2,7 @@
 
 //presi dal docker-compose.yml
 $host = 'db'; 
-$dbname = 'root_db'; 
+$dbname = 'link_shortener'; 
 $user = 'user';
 $password = 'user';
 $port = 3306;

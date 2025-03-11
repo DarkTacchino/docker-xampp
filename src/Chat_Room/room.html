@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat_Room</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1c1c1e;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h3 {
+            font-size: 28px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        #stanze-container {
+            width: 90%;
+            max-width: 500px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #crea-stanza-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+            margin-top: 20px;
+            display: block;
+            width: auto;
+        }
+
+        #crea-stanza-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .freccia-back {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 28px;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .freccia-back:hover {
+            color: #007bff;
+        }
+
+        /* Popup scuro */
+        #popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            color: white;
+        }
+
+        #popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 5;
+        }
+
+        #close-popup {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        #close-popup:hover {
+            color: #ff0000;
+        }
+
+        .stanza {
+            background-color: #444;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .stanza:hover {
+            background-color: #555;
+        }
+
+        .stanza a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .stanza p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Freccia per tornare a login.html -->
+    <a href="login.html" class="freccia-back">&#8592;</a>
+
+    <h3>Le tue stanze:</h3>
+    <div id="stanze-container">
+        <!-- Le stanze verranno caricate qui con JavaScript -->
+    </div>
+
+    <button id="crea-stanza-btn">Crea una nuova stanza</button>
+
+    <!-- Overlay per il popup -->
+    <div id="popup-overlay"></div>
+
+    <!-- Popup per creare la stanza -->
+    <div id="popup">
+        <button id="close-popup">&times;</button> <!-- "X" per chiudere -->
+        <h3>Crea una nuova stanza</h3>
+        <form id="crea-stanza-form">
+            <label for="nome">Nome Stanza:</label>
+            <input type="text" name="nome" id="nome" required><br><br>
+            
+            <label for="descrizione">Descrizione:</label>
+            <input type="text" name="descrizione" id="descrizione" required><br><br>
+            
+            <button type="submit">Crea Stanza</button>
+        </form>
+    </div>
+
+    <script>
+        const popup = document.getElementById('popup');
+        const popupOverlay = document.getElementById('popup-overlay');
+        const closePopupBtn = document.getElementById('close-popup');
+        const creaStanzaBtn = document.getElementById('crea-stanza-btn');
+        const creaStanzaForm = document.getElementById('crea-stanza-form');
+
+        // Mostra il popup quando si clicca sul bottone
+        creaStanzaBtn.addEventListener('click', function() {
+            popup.style.display = 'block';
+            popupOverlay.style.display = 'block';
+        });
+
+        // Chiude il popup cliccando sulla "X"
+        closePopupBtn.addEventListener('click', chiudiPopup);
+
+        // Chiude il popup cliccando fuori
+        popupOverlay.addEventListener('click', chiudiPopup);
+
+        function chiudiPopup() {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+        }
+
+        // Funzione per creare una nuova stanza
+        creaStanzaForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('room.php?action=crea_stanza', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                console.log(result);
+                caricaStanze(); // Ricarica le stanze
+                chiudiPopup(); // Chiude il popup dopo la creazione
+                creaStanzaForm.reset(); // Pulisce i campi del form
+            });
+        });
+
+        // Carica le stanze all'avvio della pagina
+        function caricaStanze() {
+            fetch('room.php?action=get_stanze')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('stanze-container');
+                    container.innerHTML = ''; // Pulisce il div
+
+                    if (data.error) {
+                        container.innerHTML = `<p style="color: red;">Errore: ${data.error}</p>`;
+                        return;
+                    }
+
+                    if (data.length === 0) {
+                        container.innerHTML = '<p>Non hai stanze.</p>';
+                    } else {
+                        data.forEach(stanza => {
+                            container.innerHTML += `
+                                <div class="stanza">
+                                    <a href="chat.html?id=${stanza.id}">${stanza.nome}</a><br>
+                                    <p>${stanza.descrizione}</p>
+                                </div>`;
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Errore JSON:", error);
+                    document.getElementById('stanze-container').innerHTML = 
+                        '<p style="color: red;">Errore nel caricamento delle stanze.</p>';
+                });
+        }
+
+        caricaStanze(); // Chiama la funzione all'avvio
+    </script>
+</body>
+</html>
