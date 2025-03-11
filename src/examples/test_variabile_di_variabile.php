@@ -4,9 +4,14 @@ $b = "c";
 $c = "d";
 $d = "e";
 $e = "ciao!";
+$pippo = "ciao";
 
-echo $a."<br>";
-echo $$a."<br>";
-echo $$$a."<br>";
-echo $$$$a."<br>";
-echo $$$$$a."<br>";
+echo $a; // stampa "b"
+// echo $b
+echo $$a;
+// echo $c
+// echo $$b
+echo $$$a;
+
+$z = $_GET["id"]
+echo $$z;

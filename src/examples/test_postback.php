@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Se i dati sono validi, puoi elaborarli (es. salvare in un database)
         // Qui mostriamo solo un messaggio di successo
-        $message = "Grazie, $name! Il tuo messaggio è stato inviato.";
+        $info = "Grazie, $name! Il tuo messaggio è stato inviato.";
         // Resetta i campi del modulo
         $name = $email = $message = "";
     }
@@ -40,8 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <?php if (!empty($error)): ?>
         <p style="color: red;"><?php echo $error; ?></p>
-    <?php elseif (!empty($message)): ?>
-        <p style="color: green;"><?php echo $message; ?></p>
+    <?php elseif (!empty($info)): ?>
+        <p style="color: green;"><?php echo $info; ?></p>
     <?php endif; ?>
 
     <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">

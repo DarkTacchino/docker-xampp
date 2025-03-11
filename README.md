@@ -24,6 +24,7 @@ Questo script:
 1. Rimuove e ricrea la directory `mariadb_run` per evitare conflitti con i permessi di MariaDB.
 2. Avvia i container definiti in `docker-compose.yml`.
 3. Configura MariaDB per accettare connessioni da qualsiasi host (`%`).
+4. Configura Apache per servire anche file senza estensione php (utile per alcuni progetti, ad esempio link shortener) trasferendo il file `.htaccess`.
 
 ### 3. **File di configurazione `Docker`**
 - `docker-compose.yml` è stato adattato per consentire l'avvio di MariaDB ed evitare problemi di permessi su NixOS (cartella `mariadb_run`)
