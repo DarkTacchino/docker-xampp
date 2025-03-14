@@ -138,6 +138,14 @@ body{
     cursor: pointer; /* Aggiunge un cursore a mano quando il mouse è sopra il pulsante */
 }
 
+.copy-btn {
+    color: white; /* Colore del testo */
+    font-size: 20px; /* Dimensione del testo */
+    background: none; /* Rimuove lo sfondo */
+    border: none; /* Rimuove il bordo */
+    cursor: pointer; /* Aggiunge un cursore a mano quando il mouse è sopra il pulsante */
+}
+
 .rename-btn{
     color: white; /* Colore del testo */
     font-size: 20px; /* Dimensione del testo */
@@ -146,13 +154,20 @@ body{
     cursor: pointer; /* Aggiunge un cursore a mano quando il mouse è sopra il pulsante */
 }
 
+.actions form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
 .actions{
     position: absolute;
     right: 10px;
     top: 10px;
     /* border: 2px solid  rgb(255, 0, 0);  Bordo bianco */
     display: flex; /* Mette i pulsanti uno accanto all'altro */
-    align-items: center; /* Allinea i pulsanti verticalmente */
+    flex-direction: row; /* Dispone gli elementi in riga (orizzontale) */
+    align-items: center;
     gap: 10px; /* Distanza tra i pulsanti */
 }
 

@@ -147,6 +147,7 @@ function renderLinkCard($link, $changeMethod)
         $linkType = "http://Link_Shortener.com/{$shortLink}";
     }
     
+    $copy = "<button type='button' class='copy-btn' onclick='copyToClipboard(\"{$linkType}\")'><i class='bx bxs-copy'></i></button><br>";
     $deleteButton = "<button type='submit' name='elimina' class='delete-btn'><i class='bx bxs-eraser'></i></button><br>";
     $renameButton = "<button type='button' class='rename-btn' onclick='showRenameInput(\"{$shortLink}\")'><i class='bx bx-rename'></i></button>";
     
@@ -171,14 +172,24 @@ function renderLinkCard($link, $changeMethod)
             <div class='actions'>
                 <form action='dashboard.php' method='POST'>
                     <input type='hidden' name='short_link' value='{$shortLink}'>
+                    {$copy}
                     {$deleteButton}
                 </form>
                 {$renameButton}
+                
             </div>
             {$renameform}
         </div>
     </div>
     <script>
+//Gestione copia
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+        alert('Link copiato negli appunti!');
+        }).catch(err => {
+        console.error('Errore nella copia:', err);
+        });
+
     // Gestione del click per mostrare/nascondere il form di rinomina
     const container = document.querySelector('.links_listLink');
     if (container) {
