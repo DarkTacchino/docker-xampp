@@ -12,10 +12,7 @@
 
 /* Stili per il corpo della pagina */
 body {
-    background-image: url('immagini/colorful-lights-at-night-hill-view-6i792p0rp9l9w459.jpg');
-    background-size: cover; /* Per adattare l'immagine alla finestra */
-    background-position: center; /* Per centrare l'immagine */
-    background-repeat: no-repeat; /* Per evitare ripetizioni */
+    background-color: #222121;
     margin: 0;
     padding: 0;
 }
@@ -36,23 +33,27 @@ body{
 }
 
 .links_listLink{
-    color: white; 
-    /*  border: 2px solid white; Bordo bianco */
-    align-items: center; /* Centra verticalmente */
-    max-height: 450px; /* Altezza massima prima che compaia la barra */
-    overflow-y: auto; /* Barra verticale se necessario */
-    overflow-x: hidden; /* Nasconde la barra orizzontale */
-}
-
-.container{
-    background: rgba(255, 255, 255, 0.05); /* Quasi completamente trasparente */
+    background: rgba(249, 239, 239, 0.05); /* Quasi completamente trasparente */
     backdrop-filter: blur(12px); /* Più sfocatura per l’effetto vetro appannato */
     -webkit-backdrop-filter: blur(12px); /* Per Safari */
     border-radius: 12px; /* Angoli arrotondati */
     color: white; 
+    /*  border: 2px solid white; Bordo bianco */
+    align-items: center; /* Centra verticalmente */
+    max-height: 400px; /* Altezza massima prima che compaia la barra */
+    overflow-y: auto; /* Barra verticale se necessario */
+    scrollbar-width: thin; /* Rende la scrollbar più sottile (per Firefox) */
+    scrollbar-color: rgb(159, 159, 159) black; /* Colore della scrollbar (maniglia e sfondo) */
+    overflow-x: hidden; /* Nasconde la barra orizzontale */
+}
+
+.container{
+    
+    color: white; 
     /*  border: 2px solid rgb(212, 255, 41); Bordo bianco */
     align-items: center; /* Centra verticalmente */
     width: 575px;
+    height: 550px;
     position: relative;
     border-radius: 10px; /* Angoli arrotondati */
 }
@@ -92,6 +93,12 @@ body{
 .sort_link {
     flex: 1; /* Il testo occupa lo spazio disponibile */
     text-align: left; /* Allinea il testo a sinistra */
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 400px;
+    display: block;
+
+
 }
 
 .original_link {
@@ -197,7 +204,7 @@ body{
 .rename_form button[name="rinomina"] {
     flex: 0 0 20%;
     height: 100%;
-    background-color: #0347a0;
+    background-color: #030303;
     border: none;
     color: white;
     font-size: 20px;
@@ -208,7 +215,32 @@ body{
 }
 
 .rename_form button[name="rinomina"]:hover {
-    background-color: #218838;
+    background-color: #333;
 }
+
+.form_crea input[type="text"] {
+    width: 100%; /* Occupa tutta la larghezza disponibile */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 55px;
+    font-size: 16px;
+}
+
+.form_crea input[type="submit"] {
+    background-color: black; /* Colore di sfondo nero */
+    color: white; /* Testo bianco */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Effetto hover */
+.form_crea input[type="submit"]:hover {
+    background-color: #333; /* Un nero leggermente più chiaro */
+}
+
 
 

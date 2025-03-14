@@ -66,10 +66,15 @@ function deliteLink($conn, $changeMethod)
 //RINOMINA LINK
 function renameLink($conn, $changeMethod)
 {
-    if (isset($_POST['old_short_link']) && isset($_POST['new_short_link']))
+    if($_SERVER["REQUEST_METHOD"]=="POST")
     {
         $old_short_link = $_POST['old_short_link'];
         $new_short_link = $_POST['new_short_link'];
+
+        if (empty($old_short_link) || empty($new_short_link)) {
+            header('Location: front_dashboard.php');
+            exit; // Termina l'esecuzione
+        }
 
         // Controllo che il nuovo nome non sia già usato
         $query_check = "SELECT * FROM links WHERE short_link = '$new_short_link'";
@@ -89,7 +94,7 @@ function renameLink($conn, $changeMethod)
                 rename($old_file, $new_file);
             }
             header('Location: front_dashboard.php');
-            exit();
+            exit;
         }
     }
 }
