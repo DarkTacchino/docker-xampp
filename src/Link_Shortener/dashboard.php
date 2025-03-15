@@ -147,7 +147,7 @@ function renderLinkCard($link, $changeMethod)
         $linkType = "http://Link_Shortener.com/{$shortLink}";
     }
     
-    $copy = "<button type='button' class='copy-btn' onclick='copyToClipboard(\"{$linkType}\")'><i class='bx bxs-copy'></i></button><br>";
+    $copy = "<button type='button' class='copy-btn' onclick='copyToClipboard(\"{$url}\")'><i class='bx bxs-copy'></i></button><br>";
     $deleteButton = "<button type='submit' name='elimina' class='delete-btn'><i class='bx bxs-eraser'></i></button><br>";
     $renameButton = "<button type='button' class='rename-btn' onclick='showRenameInput(\"{$shortLink}\")'><i class='bx bx-rename'></i></button>";
     
@@ -184,11 +184,41 @@ function renderLinkCard($link, $changeMethod)
     <script>
 //Gestione copia
     function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(() => {
-        alert('Link copiato negli appunti!');
-        }).catch(err => {
-        console.error('Errore nella copia:', err);
-        });
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                alert('Link copiato negli appunti!');
+            })
+            .catch(err => {
+                console.error('Errore nella copia con Clipboard API:', err);
+                fallbackCopyToClipboard(text);
+            });
+    } else {
+        fallbackCopyToClipboard(text);
+    }
+}
+
+function fallbackCopyToClipboard(text) {
+    // Crea un elemento textarea temporaneo
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            alert('Link copiato (metodo fallback)!');
+        } else {
+            console.error('Fallback: Impossibile copiare il testo.');
+        }
+    } catch (err) {
+        console.error('Fallback: Errore durante la copia', err);
+    }
+    
+    document.body.removeChild(textArea);
+}
 
     // Gestione del click per mostrare/nascondere il form di rinomina
     const container = document.querySelector('.links_listLink');
