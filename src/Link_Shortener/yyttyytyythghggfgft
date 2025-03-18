@@ -1,7 +1,0 @@
-<?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/db.php';
-require_once __DIR__ . '/dashboard.php';
-$short_link = basename($_SERVER['PHP_SELF'], '.php');
-header('Location: https://www.youtube.com/watch?v=-r687V8yqKY&list=RD-r687V8yqKY&start_radio=1');
-incrementVisits($conn, $short_link);
-exit();

@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD']==='POST')
     $short_link = substr(md5($original_link), 0, 6);
     //CONTROLLO PRIMA SE ESISTE GIà
     if (checkDuplicateLink($conn, $short_link)) {
-        echo "Questo link è già stato abbreviato.";
+        echo "<script>showToast('Questo link è già stato abbreviato.')</script>";
     } else 
     {
          //CONDIZIONE PER CAPIRE CHE METODO UTILIZZARE
@@ -76,5 +76,20 @@ if($_SERVER['REQUEST_METHOD']==='POST')
         </div>
     </div>
 </body>
+<script>
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => {
+            toast.remove();
+        }, 300); // attende la fine della transizione
+    }, 10000); // la notifica rimane visibile per 1 secondo
+}
+</script>
+
 </html>
 

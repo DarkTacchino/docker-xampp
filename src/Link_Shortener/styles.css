@@ -97,8 +97,15 @@ body{
     overflow: hidden;
     max-width: 400px;
     display: block;
+}
 
-
+a{
+    color: #0099ff;
+    text-decoration: none;
+}
+a:hover{
+    color: #0077cc; 
+    text-decoration: underline; 
 }
 
 .original_link {
@@ -111,8 +118,8 @@ body{
     display: block;
 
     /* Effetto sfumato verso la fine */
-    -webkit-mask-image: linear-gradient(to right, black 70%, rgba(0, 0, 0, 0));
-    mask-image: linear-gradient(to right, black 70%, rgba(0, 0, 0, 0));
+    -webkit-mask-image: linear-gradient(to right, black 90%, rgba(0, 0, 0, 0));
+    mask-image: linear-gradient(to right, black 90%, rgba(0, 0, 0, 0));
 }
 
 
@@ -256,6 +263,38 @@ body{
 .form_crea input[type="submit"]:hover {
     background-color: #333; /* Un nero leggermente più chiaro */
 }
+
+
+
+.copied-notification {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+    z-index: 9999;
+}
+
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 0, 0, 0.75);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 5s ease-out;
+}
+
+
 
 
 

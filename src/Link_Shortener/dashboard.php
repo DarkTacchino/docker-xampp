@@ -147,7 +147,7 @@ function renderLinkCard($link, $changeMethod)
         $linkType = "http://Link_Shortener.com/{$shortLink}";
     }
     
-    $copy = "<button type='button' class='copy-btn' onclick='copyToClipboard(\"{$url}\")'><i class='bx bxs-copy'></i></button><br>";
+    $copy = "<button type='button' class='copy-btn' onclick='copyToClipboard(\"{$url}\", event)'><i class='bx bxs-copy'></i></button><br>";
     $deleteButton = "<button type='submit' name='elimina' class='delete-btn'><i class='bx bxs-eraser'></i></button><br>";
     $renameButton = "<button type='button' class='rename-btn' onclick='showRenameInput(\"{$shortLink}\")'><i class='bx bx-rename'></i></button>";
     
@@ -164,8 +164,7 @@ function renderLinkCard($link, $changeMethod)
     $linkCard = "
     <div class='link_card'>
         <div class='link_info'>
-            <div class='sort_link'>
-                <b>Link accorciato:</b> <a href='{$url}' class='short_link' target='_blank'>{$linkType}</a>
+                <div class='sort_link'><b>Link accorciato:</b> <a href='{$url}' class='short_link' target='_blank'>{$linkType}</a>
                 <div class='original_link'><b>Link originale:</b> <a href='{$originalLink}'>{$originalLink}</a></div>
                 <div class='visits'>Numero di visite: {$visits}</div>
             </div>
@@ -182,24 +181,45 @@ function renderLinkCard($link, $changeMethod)
         </div>
     </div>
     <script>
-//Gestione copia
-    function copyToClipboard(text) {
+// Mostra una notifica sotto il mouse per 1 secondo
+function showCopiedNotification(x, y) {
+    const notif = document.createElement('div');
+    notif.className = 'copied-notification';
+    notif.textContent = 'Link copiato!';
+    // Posiziona la notifica un po' più in basso rispetto al cursore
+    notif.style.left = x + 'px';
+    notif.style.top = (y + 20) + 'px';
+    document.body.appendChild(notif);
+
+    // Dopo 1 secondo, avvia la transizione di dissolvenza e rimuovi l'elemento
+    setTimeout(() => {
+        notif.style.opacity = '0';
+        setTimeout(() => {
+            notif.remove();
+        }, 300); // attende il termine della transizione
+    }, 1000);
+}
+
+// Funzione per copiare usando la Clipboard API
+function copyToClipboard(text, event) {
     if (navigator.clipboard) {
         navigator.clipboard.writeText(text)
             .then(() => {
-                alert('Link copiato negli appunti!');
+                if (event) {
+                    showCopiedNotification(event.clientX, event.clientY);
+                }
             })
             .catch(err => {
                 console.error('Errore nella copia con Clipboard API:', err);
-                fallbackCopyToClipboard(text);
+                fallbackCopyToClipboard(text, event);
             });
     } else {
-        fallbackCopyToClipboard(text);
+        fallbackCopyToClipboard(text, event);
     }
 }
 
-function fallbackCopyToClipboard(text) {
-    // Crea un elemento textarea temporaneo
+// Metodo fallback per copiare
+function fallbackCopyToClipboard(text, event) {
     const textArea = document.createElement('textarea');
     textArea.value = text;
     document.body.appendChild(textArea);
@@ -208,9 +228,9 @@ function fallbackCopyToClipboard(text) {
     
     try {
         const successful = document.execCommand('copy');
-        if (successful) {
-            alert('Link copiato (metodo fallback)!');
-        } else {
+        if (successful && event) {
+            showCopiedNotification(event.clientX, event.clientY);
+        } else if (!successful) {
             console.error('Fallback: Impossibile copiare il testo.');
         }
     } catch (err) {
@@ -219,6 +239,7 @@ function fallbackCopyToClipboard(text) {
     
     document.body.removeChild(textArea);
 }
+
 
     // Gestione del click per mostrare/nascondere il form di rinomina
     const container = document.querySelector('.links_listLink');
