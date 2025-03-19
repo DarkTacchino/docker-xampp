@@ -1,6 +1,6 @@
 <?php
 require_once '../includes/db.php';
-require_once '../Style/index.php';
+
 
 require_once __DIR__ . '/dashboard.php';
 // Controlla se l'utente è loggato
