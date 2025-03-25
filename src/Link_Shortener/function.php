@@ -21,8 +21,7 @@ if($_SERVER['REQUEST_METHOD']==='POST')
 function createFilesPHP($conn, $short_link, $original_link, $user_id)
 {
     //INSERISCO I DATI NEL DATABASE
-    $query = "INSERT INTO links (short_link, original_link, id_user, method) VALUES ('$short_link', '$original_link', '$user_id', 1)";
-    $conn->query($query);
+    anti_injection($conn, $short_link, $original_link, $user_id, 1);
      // Percorso della cartella dove salvare i file PHP
      $file_path = __DIR__ . "/$short_link";
 
@@ -42,8 +41,7 @@ function createFilesPHP($conn, $short_link, $original_link, $user_id)
 //PRIMO METODO 
 function InsertLink_Redirect($conn, $short_link, $original_link, $user_id)
 {
-    $query = "INSERT INTO links (short_link, original_link, id_user, method) VALUES ('$short_link', '$original_link', '$user_id', 0)";
-    $conn->query($query);
+    anti_injection($conn, $short_link, $original_link, $user_id, 0);
 }
 //METODO ELIMINA LINK
 function deliteLink($conn, $changeMethod)
@@ -77,16 +75,32 @@ function renameLink($conn, $changeMethod)
         }
 
         // Controllo che il nuovo nome non sia già usato
-        $query_check = "SELECT * FROM links WHERE short_link = '$new_short_link'";
-        $result = $conn->query($query_check);
+        $query_check = "SELECT * FROM links WHERE short_link = ?";
+        if ($stmt = $conn->prepare($query_check)) {
+            $stmt->bind_param("s", $new_short_link);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+        } else {
+            error_log("Errore nella preparazione della query: " . $conn->error);
+        }
 
         if ($result->num_rows > 0) {
             header('Location: front_dashboard.php?error=Il nome scelto è già in uso⚠️');
             exit;
-        } else {
+        } else 
+        {
             // Aggiorno il database
-            $query_update = "UPDATE links SET short_link = '$new_short_link' WHERE short_link = '$old_short_link'";
-            $conn->query($query_update);
+            $query_update = "UPDATE links SET short_link = ? WHERE short_link = ?";
+            if ($stmt = $conn->prepare($query_update)) {
+                $stmt->bind_param("ss", $new_short_link, $old_short_link);
+                if(!$stmt->execute()){
+                    error_log("Errore nell'UPDATE del link: " . $stmt->error);
+                }
+                $stmt->close();
+            } else {
+                error_log("Errore nella preparazione dell'UPDATE: " . $conn->error);
+            }
 
             // Rinomina il file PHP se il metodo è 1 (file system)
             $old_file = __DIR__ . "/$old_short_link";
@@ -110,12 +124,40 @@ function incrementVisits($conn, $short_link)
 //CONTROLLO DUPLICATI
 function checkDuplicateLink($conn, $short_link)
 {
-    $query = "SELECT * FROM links WHERE short_link = '$short_link'";
-    $result = $conn->query($query);
+    $query = "SELECT * FROM links WHERE short_link = ?";
+    if ($stmt = $conn->prepare($query)) {
+        $stmt->bind_param("s", $short_link);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+    } else {
+        error_log("Errore nella preparazione della query: " . $conn->error);
+    }
+
     return $result->num_rows > 0;
 }
 
-// Recupera i link dal database
+//PROTEZIONE ANTI INJECTION
+function anti_injection($conn, $short_link, $original_link, $user_id, $method)
+{
+    $query ="INSERT INTO links (short_link, original_link, id_user, method) VALUES (?,?,?,?)";
+    // Preparare la query
+    if($stmt = $conn->prepare($query)) {
+        // Bind dei parametri: "ssii" indica (string, string, integer, integer)
+        $stmt->bind_param("ssii", $short_link, $original_link, $user_id, $method);
+        
+        // Esegue il prepared statement
+        if(!$stmt->execute()){
+            // Gestione dell'errore
+            error_log("Errore nell'inserimento del link: " . $stmt->error);
+        }
+        $stmt->close();
+    } else {
+        error_log("Errore nella preparazione della query: " . $conn->error);
+    }
+}
+
+// RECUPERA I LINK DAL DATABASE
 function getLinks($conn, $changeMethod)
 {
     $id_user = $_SESSION['user_id'];
@@ -168,8 +210,9 @@ function renderLinkCard($link, $changeMethod)
     $linkCard = "
     <div class='link_card'>
         <div class='link_info'>
-                <div class='sort_link'><b>Link accorciato:</b> <a href='{$url}' class='short_link' target='_blank'>{$linkType}</a>
-                <div class='original_link'><b>Link originale:</b> <a href='{$originalLink}'>{$originalLink}</a></div>
+                <div class='sort_link'><b>Link accorciato:</b><a href='#' class='short_link' onclick='openAndReload(\"{$url}\", \"{$originalLink}\"); return false;'>{$linkType}</a>
+                <div class='original_link'><b>Link originale:</b><a href='{$originalLink}'>{$originalLink}</a>
+</div>
                 <div class='visits'>Numero di visite: {$visits}</div>
             </div>
             <div class='actions'>
@@ -185,6 +228,20 @@ function renderLinkCard($link, $changeMethod)
         </div>
     </div>
     <script>
+//Ricarica pagina 
+function openAndReload(url) {
+    event.preventDefault(); // Evita l'azione predefinita del link
+    
+    // Apri subito il link in una nuova scheda
+    window.open(url, '_blank'); 
+
+    // Dopo 1 secondo ricarica la pagina per aggiornare la dashboard
+    setTimeout(function() {
+        location.reload();
+    }, 1000);
+}
+
+    
 // Mostra una notifica sotto il mouse per 1 secondo
 function showCopiedNotification(x, y) {
     const notif = document.createElement('div');

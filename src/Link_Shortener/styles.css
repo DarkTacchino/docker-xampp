@@ -77,11 +77,11 @@ body{
    
 }
 .link_card:not(.expanded):hover{
-    height: 100px;
+    height: 107px;
 }
 
 .link_card.expanded {
-    height: 140px; /* Aumenta l'altezza per la classe expanded */
+    height: 145px; /* Aumenta l'altezza per la classe expanded */
 }
 
 .link_info {
