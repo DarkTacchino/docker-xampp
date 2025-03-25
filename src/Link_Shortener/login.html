@@ -7,8 +7,38 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Link_Shortener
     </title>
+    <script>
+        function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => {
+            toast.remove();
+        }, 300); // attende la fine della transizione
+    }, 5000); // la notifica rimane visibile per 5 secondi
+}
+
+// Funzione per ottenere i parametri GET dall'URL
+function getQueryParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const errorMessage = getQueryParam('error');
+    if (errorMessage) {
+        showToast(errorMessage);
+    }
+});
+
+        </script>
 </head>
 <body>
+    
+    <?php endif; ?>
     <div class="wrapper">
         <form method="post" action="login.php">
             <h1>Login</h1>

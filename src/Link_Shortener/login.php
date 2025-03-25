@@ -18,9 +18,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     }
     else
     {
-        echo "errore! <br>";
+        header("Location: login.html?error=Errore credeziali");
+        exit();
     }
-    print_r ($_POST);
 }
 else
 {

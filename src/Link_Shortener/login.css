@@ -116,3 +116,21 @@ box-shadow: 0 0 10px rgba(0, 0, 0, .2);
 .register-linkp a :hover{
     text-decoration: underline;
 }
+
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 0, 0, 0.75);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 5s ease-out;
+    width: 90%;
+    max-width: 300px;
+    text-align: center;
+}

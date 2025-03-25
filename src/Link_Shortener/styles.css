@@ -12,7 +12,7 @@
 
 /* Stili per il corpo della pagina */
 body {
-    background-color: #222121;
+    background-color: #000000;
     margin: 0;
     padding: 0;
 }
@@ -71,6 +71,7 @@ body{
     align-items: flex-start;
 
     /* border: 2px solid greenyellow;  Bordo bianco */
+    border: 2px solid white;
     border-radius: 10px; /* Angoli arrotondati */
     transition: height 0.2s ease-in-out;
    
@@ -287,12 +288,17 @@ a:hover{
     background: rgba(255, 0, 0, 0.75);
     color: #fff;
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: 20px; /* bordo più arrotondato */
     font-size: 16px;
     z-index: 9999;
     opacity: 1;
     transition: opacity 5s ease-out;
 }
+
+.toast-notification p {
+    text-align: center;  /* Centra il testo */
+}
+
 
 
 

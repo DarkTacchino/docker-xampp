@@ -1,8 +1,6 @@
 <?php
 require_once '../includes/db.php';
-
-
-require_once __DIR__ . '/dashboard.php';
+require_once __DIR__ . '/function.php';
 // Controlla se l'utente è loggato
 if (!isset($_SESSION["username"]) || !isset($_SESSION["user_id"])) 
 {
@@ -14,10 +12,15 @@ if($_SERVER['REQUEST_METHOD']==='POST')
 {
     $user_id = $_SESSION['user_id'];
     $original_link = $_POST['original_link'];
-    $short_link = substr(md5($original_link), 0, 6);
+    $short_link = substr(md5($original_link . $user_id), 0, 6);
+
     //CONTROLLO PRIMA SE ESISTE GIà
     if (checkDuplicateLink($conn, $short_link)) {
-        echo "<script>showToast('Questo link è già stato abbreviato.')</script>";
+        echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showToast('Questo link è già stato abbreviato⚠️');
+        });
+    </script>";
     } else 
     {
          //CONDIZIONE PER CAPIRE CHE METODO UTILIZZARE
@@ -47,7 +50,7 @@ if($_SERVER['REQUEST_METHOD']==='POST')
 <body>
    
     <div class="container">
-        <h1>Link Shortener</h1>
+        <h1><a href="login.html">Link Shortener</a></h1>
 
         <!-- Form per inserire un nuovo URL -->
         <form method="post" action="front_dashboard.php">
@@ -76,7 +79,16 @@ if($_SERVER['REQUEST_METHOD']==='POST')
         </div>
     </div>
 </body>
+
+<!-- Codice java per notifica di un tost -->
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("error")) {
+        showToast(params.get("error"));
+        window.history.replaceState({}, document.title, window.location.pathname); // Rimuove il parametro dalla URL
+    }
+});
 function showToast(message) {
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
@@ -87,7 +99,7 @@ function showToast(message) {
         setTimeout(() => {
             toast.remove();
         }, 300); // attende la fine della transizione
-    }, 10000); // la notifica rimane visibile per 1 secondo
+    }, 4000); // la notifica rimane visibile per 1 secondo
 }
 </script>
 

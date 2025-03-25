@@ -29,7 +29,7 @@ function createFilesPHP($conn, $short_link, $original_link, $user_id)
      // Codice PHP per il file
      $php_code = "<?php\n";
      $php_code .= "require_once \$_SERVER['DOCUMENT_ROOT'] . '/includes/db.php';\n";
-     $php_code .= "require_once __DIR__ . '/dashboard.php';\n";
+     $php_code .= "require_once __DIR__ . '/function.php';\n";
      $php_code .= "\$short_link = basename(\$_SERVER['PHP_SELF'], '.php');\n";
      $php_code .= "header('Location: $original_link');\n";
      $php_code .= "incrementVisits(\$conn, \$short_link);\n";
@@ -81,7 +81,8 @@ function renameLink($conn, $changeMethod)
         $result = $conn->query($query_check);
 
         if ($result->num_rows > 0) {
-            echo "Errore: Il nome scelto è già in uso.";
+            header('Location: front_dashboard.php?error=Il nome scelto è già in uso⚠️');
+            exit;
         } else {
             // Aggiorno il database
             $query_update = "UPDATE links SET short_link = '$new_short_link' WHERE short_link = '$old_short_link'";
@@ -139,6 +140,7 @@ function renderLinkCard($link, $changeMethod)
     $originalLink = $link['original_link'];
     $visits = $link['visits'];
     
+    //Creazione URL
     if ($changeMethod == 0) {
         $url = "https://$host/Link_Shortener/redirect.php?c={$shortLink}";
         $linkType = "http://Link_Shortener.com/{$shortLink}";
@@ -147,6 +149,7 @@ function renderLinkCard($link, $changeMethod)
         $linkType = "http://Link_Shortener.com/{$shortLink}";
     }
     
+    //Creazione tasti di funzionamento
     $copy = "<button type='button' class='copy-btn' onclick='copyToClipboard(\"{$url}\", event)'><i class='bx bxs-copy'></i></button><br>";
     $deleteButton = "<button type='submit' name='elimina' class='delete-btn'><i class='bx bxs-eraser'></i></button><br>";
     $renameButton = "<button type='button' class='rename-btn' onclick='showRenameInput(\"{$shortLink}\")'><i class='bx bx-rename'></i></button>";
@@ -161,6 +164,7 @@ function renderLinkCard($link, $changeMethod)
         </form>
     </div>";
     
+    //Variabile con il codice html e java per costruire la card view 
     $linkCard = "
     <div class='link_card'>
         <div class='link_info'>
@@ -169,7 +173,7 @@ function renderLinkCard($link, $changeMethod)
                 <div class='visits'>Numero di visite: {$visits}</div>
             </div>
             <div class='actions'>
-                <form action='dashboard.php' method='POST'>
+                <form action='function.php' method='POST'>
                     <input type='hidden' name='short_link' value='{$shortLink}'>
                     {$copy}
                     {$deleteButton}
