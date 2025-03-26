@@ -2,6 +2,6 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/db.php';
 require_once __DIR__ . '/function.php';
 $short_link = basename($_SERVER['PHP_SELF'], '.php');
-header('Location: a');
+header('Location: Bf');
 incrementVisits($conn, $short_link);
 exit();
