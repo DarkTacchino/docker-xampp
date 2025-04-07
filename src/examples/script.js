@@ -11,8 +11,31 @@ async function fetchData() {
     }
 }
 
+//da base
+async function fetchDataDB() {
+    const url = "../api/users.php";
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error("Errore recupero dati:", error);
+        return [];
+    }
+}
+
 async function populateTable() {
-    const dat = await fetchData();
+    const i = 0;
+    if(i == 1)
+    {
+        const dat = await fetchData();
+    }
+    else
+    {
+        const dat = await fetchDataDB();
+    }
+    
     const data_table = document.getElementById("data-table");
 
     // Se 'dat' è un array, iteriamo direttamente su di esso
@@ -32,3 +55,4 @@ async function populateTable() {
 }
 
 document.getElementById("load-data-button").addEventListener('click', populateTable);
+document.getElementById("load-data-button-db").addEventListener('click', populateTable);
