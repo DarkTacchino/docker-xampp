@@ -693,7 +693,6 @@
             <li><a href="#about">Chi Sono</a></li>
             <li><a href="#pcto">PCTO</a></li>
             <li><a href="#hobbies">Hobby</a></li>
-            <li><a href="#contact">Contatti</a></li>
         </ul>
         <button class="translate-btn">Translate</button>
         <div class="hamburger">
@@ -865,26 +864,7 @@
         </div>
     </section>
     
-    <section id="contact" class="section">
-        <div class="container">
-            <h2>Contatti</h2>
-            <div class="contact-form">
-                <div class="form-group">
-                    <label for="name">Nome</label>
-                    <input type="text" id="name" class="form-control" placeholder="Il tuo nome">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control" placeholder="La tua email">
-                </div>
-                <div class="form-group">
-                    <label for="message">Messaggio</label>
-                    <textarea id="message" class="form-control" placeholder="Scrivi qui il tuo messaggio"></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Invia Messaggio</button>
-            </div>
-        </div>
-    </section>
+    
     
     <footer>
         <div class="container">
@@ -986,10 +966,6 @@
                 navHobbies: {
                     it: "Hobby",
                     en: "Hobbies"
-                },
-                navContact: {
-                    it: "Contatti",
-                    en: "Contact"
                 },
                 translateBtn: {
                     it: "Translate",
