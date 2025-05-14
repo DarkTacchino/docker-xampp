@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sito personale - Gigli Thomas</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/1626ce6b1a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/logo_scritta_blu.png" class="logo">
+            <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">Me</a></li>
+                <li><a href="#services">PCTO</a></li>
+                <li><a href="#portfolio">Progetti</a></li>
+                <li><a href="#">Materie</a></li>
+                <li><a href="#contact">Contatti</a></li>
+                <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+            </ul>
+            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+            <p>Studente della classe 5BM, sezione informatica.</p>
+            <h1>Ciao, sono <span>Thomas</span><br> e questo è il mio <br><span>sito personale</span>. </h1>
+        </div>
+    </div>
+</div>
+
+
+<!-- sezione ME-->
+
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="images/immagine me.jpg">
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">Qualcosa su di me</h1>
+                <p>Questo è il mio spazio personale online che userò per "raccontarmi".<br> In questo sito 
+                vi presenterò in particolare chi sono e soprattutto <span>la mia esperienza</span> a 360° in questi 5 anni di scuola. <br><br>
+                In reatà questa è la parte del sito in cui <span>parlo di me stesso</span>, quindi ciao a tutti, io sono Thomas e frequento la classe 5BM all'Itis Marconi Pieralisi di Jesi.<br><br>
+                Ho scelto questa scuola nel lontano 2018 soprattutto perchè ero <span>molto appassionato ai videogiochi</span> e mi piaceva molto smanettare in generale con la tecnologia.
+                <br>Ovviamente <span>non avevo idea di cosa fosse in realtà il coding e lo sviluppo di software</span>, ma questo per me non è stato un ostacolo lungo il mio percorso, in quanto 
+                mi sono appassionato subito a queste tematiche studiandole a scuola. <br><br>
+                In generale sono un <span>ragazzo molto curioso</span>, sempre pronto per fare nuove esperienze e conoscere nuovi ambiti della vita.<br>
+                Legato a questo, una mia grande passione è <span>viaggiare</span>, e spero in futuro di fare più viaggi possibili in giro per il mondo alla scoperta di nuovi posti.<br><br> 
+                Ho una <span>famiglia</span> composta da 4 persone: Io, mio padre, mia madre e mia sorella piccola.<br>
+                Nel tempo libero cerco di uscire il più possibile con i miei amici, ma qualche volta sento anche il bisogno di stare da solo<br>
+                Una cosa che mi occupa molto tempo libero è il <span>basket</span>, ovvero il mio sport preferito e lo sport che pratico in maniera agonistica ormai da 7 anni.<br><br>
+                Infine, anche se gioco a basket, una mia grande passione è il calcio. Sono un grande tifoso del <span>Milan</span> e quando ho la possibilità vado allo stadio insieme ad alcuni amici.
+                </p>
+
+                <br><br><br>
+
+
+                <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p class="tab-links" onclick="opentab('tempolibero')">Tempo libero</p>
+                    <p class="tab-links" onclick="opentab('passioni')">Passioni</p>
+                    <p class="tab-links" onclick="opentab('sport')">Sport</p>
+                </div>
+                <div class="tab-contents active-tab" id="skills">
+                    <ul>
+                        <li><span>Analisi di progetto</span><br>Capacità di analisi di problemi non banali, risolvibili con un software</li>
+                        <li><span>Sviluppo grafico </span><br>Disegno e prograttazione interfacce grafiche per software</li>
+                        <li><span>Sviluppo software</span><br>Utilizzo di linguaggi di programmazione C like, JavaScript, HTML-CSS, Java. </li> 
+                    </ul>
+                </div>
+                <div class="tab-contents" id="tempolibero">
+                    <ul>
+                        <li><span>Uscire con gli amici</span><br>Fare uscite pomeridiane con gli amici.</li>
+                        <li><span>Giocare a basket </span><br>Andare al campetto per giocare con i miei amici</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="passioni">
+                    <ul>
+                        <li><span>Viaggiare</span><br>Viaggiare è una delle mie più grandi passioni, in futuro spero di girare il mondo. Il mio viaggio dei sogni è il Giappone. </li>
+                        <li><span>Calcio e Milan</span><br>Sono un garnde tifoso del Milan e qualche volta vado a Milano per sostenere la squadra allo stadio.</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="sport">
+                    <ul>
+                        <li><span>Basket </span><br>Gioco a basket in maniera agonistica ormai da 7 anni, sono abbastanza bravo e gioco nella squdra Under19 di Polverigi.</li>
+                        <li><span>Golf </span><br>In passato ho giocato molti anni a Golf in quanto mio zio è proprietario di un golf club.</li>
+                        <li><span>Calcio</span><br>Il calcio è lo sport che mi piace più guardare in assoluto, anche più del basket, mentre invece come giocatore non sono un granchè.</li>
+                    </ul>
+                </div>
+                <a href="#" class="btn">Vedi di più su di me</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- servizi-->
+<div id="services">
+    <div class="container">
+        <h1 class="sub-title">PCTO</h1>
+        <div class="services-list">
+            <div>
+                <i class="fa-brands fa-app-store-ios"></i>
+                <h2>Analisi del progetto</h2>
+                <p>.........................................................
+                ............................................................</p>
+                <a href="#">Scopri di più</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-code"></i>
+                <h2>Sviluppo software</h2>
+                <p>.........................................................
+                ............................................................</p>
+                <a href="#">Scopri di più</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-crop"></i>
+                <h2>Sviluppo grafico</h2>
+                <p>.........................................................
+                ............................................................</p>
+                <a href="#">Scopri di più</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- portfolio-->
+<div id="portfolio">
+    <div class="container">
+        <h1 class="sub-title">I miei progetti</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="images/work-1.png">
+                <div class="layer">
+                    <h3>Web chat</h3>
+                    <p>.......................................................
+                    ..........................................................</p>
+                    <a href="#"><i class="fa-solid fa-link"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work-2.png">
+                <div class="layer">
+                    <h3>Progetto di classe</h3>
+                    <p>.......................................................
+                    ..........................................................</p>
+                    <a href="#"><i class="fa-solid fa-link"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/work-3.png">
+                <div class="layer">
+                    <h3>Progetto 3</h3>
+                    <p>.......................................................
+                    ..........................................................</p>
+                    <a href="#"><i class="fa-solid fa-link"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br><br><br><br><br>
+
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contattami</h1>
+                <p><i class="fa-solid fa-paper-plane"></i>thomas.gigli2705@gmail.com</p>
+                <p><i class="fa-solid fa-square-phone"></i>3737240831</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/thomasgiglii"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/thomasgiglii"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.tiktok.com/thomasgiglii"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+                <a href="images/Thomas.pdf" download="" class="btn btn2">Download CV</a>
+            </div>
+            <div class="contact-right">
+                <form>
+                    <input type="text" name = "Name" placeholder="Nome" required>
+                    <input type="email" name = "Email" placeholder="Email" required>
+                    <textarea name="Message" rows="6" placeholder="Messaggio" ></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Copyright © Thomas <i class="fa-solid fa-trademark"></i></p>
+    </div>
+</div>
+    
+
+
+
+<script src="JavaScript.js"></script>
+
+</body>
+</html>

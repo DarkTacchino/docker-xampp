@@ -1,0 +1,227 @@
+/* Stili Generali */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif; /* Scegli un font sans-serif pulito */
+  background-color: #000; /* Sfondo nero di base */
+  color: #fff;
+  overflow-x: hidden; /* Evita scroll orizzontale */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Barra di Navigazione Superiore (Logo Rockstar) */
+.top-navbar {
+  position: absolute; /* o fixed se vuoi che rimanga sempre visibile */
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 0.5s forwards;
+}
+
+.rockstar-logo-top {
+  width: 100px; /* Adatta la dimensione secondo il tuo logo */
+  height: auto;
+  filter: invert(1) brightness(2); /* Rende il logo SVG bianco se è nero */
+}
+
+/* Sezione Eroe */
+.hero-section {
+  height: 100vh; /* Occupa l'intera altezza della finestra */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Necessario per posizionare elementi figli in modo assoluto */
+  overflow: hidden; /* Nasconde parti delle palme che escono */
+  text-align: center;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Esempio di gradiente ispirato a Vice City / GTA VI */
+  background: linear-gradient(to bottom, #ff7e5f, #feb47b, #e1306c, #9a1f5c, #4a0e3a);
+  /* In alternativa, un'immagine di sfondo:
+  background-image: url('path/to/your/sky-background.jpg');
+  background-size: cover;
+  background-position: center;
+  */
+  z-index: 1;
+}
+
+/* Palme Laterali */
+.palm-tree {
+  position: absolute;
+  bottom: 0;
+  height: 85vh; /* Altezza delle palme, adattala */
+  width: auto;
+  z-index: 3; /* Sopra lo sfondo, sotto il contenuto principale se necessario */
+  opacity: 0; /* Per animazione di entrata */
+}
+
+.left-palm {
+  left: -5%; /* Posizionamento, adattalo */
+  animation: slideInFromLeft 1.5s ease-out 0.8s forwards;
+}
+
+.right-palm {
+  right: -5%; /* Posizionamento, adattalo */
+  transform: scaleX(-1); /* Specchia l'immagine orizzontalmente */
+  animation: slideInFromRight 1.5s ease-out 1s forwards;
+}
+
+/* Contenuto Principale della Sezione Eroe */
+.hero-content {
+  position: relative; /* Per stare sopra lo sfondo e le palme */
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0; /* Per animazione di entrata */
+  animation: fadeInScaleUp 1.5s ease-out 1.2s forwards;
+  padding: 0 20px; /* Aggiunto padding per evitare che il contenuto tocchi i bordi su schermi piccoli */
+}
+
+.game-main-logo {
+  width: 90%; /* Responsive, occupa il 90% del contenitore .hero-content */
+  max-width: 650px; /* Limite massimo per schermi grandi */
+  height: auto;
+  margin-bottom: 25px;
+}
+
+.release-date {
+  font-size: 1.8em; /* Adatta la dimensione */
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  color: #f0f0f0;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+.trailer-button {
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: rgba(255, 255, 255, 0.15); /* Sfondo semi-trasparente */
+  border: 2px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.trailer-button:hover {
+  background-color: #fff;
+  color: #000;
+  transform: scale(1.05);
+}
+
+/* Animazioni CSS Semplici */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInScaleUp {
+  from {
+      opacity: 0;
+      transform: scale(0.9);
+  }
+  to {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+      opacity: 0;
+      transform: translateX(-100px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+      opacity: 0;
+      transform: translateX(100px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+/* Media Queries per la responsività (Esempio base) */
+@media (max-width: 768px) {
+  .rockstar-logo-top {
+      width: 80px;
+      top: 15px;
+  }
+
+  .game-main-logo {
+      max-width: 80%; /* Logo più piccolo su schermi medi */
+      min-width: 280px; /* Assicura una dimensione minima leggibile */
+  }
+  
+  .release-date {
+      font-size: 1.5em;
+  }
+
+  .trailer-button {
+      padding: 10px 20px;
+      font-size: 1em;
+  }
+
+  .palm-tree {
+      height: 70vh; /* Palme leggermente più piccole */
+  }
+  .left-palm { left: -15%; }
+  .right-palm { right: -15%; }
+}
+
+@media (max-width: 480px) {
+  .rockstar-logo-top {
+      width: 60px;
+      top: 10px;
+  }
+  
+  .game-main-logo {
+      max-width: 90%; 
+      min-width: 250px;
+  }
+  
+  .release-date {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+  }
+
+  .trailer-button {
+      padding: 8px 15px;
+      font-size: 0.9em;
+  }
+
+  .palm-tree {
+      height: 60vh;
+       /* Su schermi molto piccoli, potresti voler nascondere le palme 
+          o ridurle/posizionarle drasticamente
+       display: none;
+      */
+  }
+  .left-palm { left: -25%; } 
+  .right-palm { right: -25%; }
+}
