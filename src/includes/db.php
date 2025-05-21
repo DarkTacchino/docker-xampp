@@ -2,9 +2,9 @@
 
 //presi dal docker-compose.yml
 $host = 'db'; 
-//$dbname = 'link_shortener'; 
+$dbname = 'link_shortener'; 
 //$dbname = 'chat_room'; 
-$dbname = 'root_db'; 
+//$dbname = 'root_db'; 
 $user = 'user';
 $password = 'user';
 $port = 3306;

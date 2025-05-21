@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# 1) Solo se esiste ed è un file
+RewriteCond %{REQUEST_FILENAME} -f
+# 2) Non è una directory
+RewriteCond %{REQUEST_FILENAME} !-d
+# 3) Il nome non contiene un punto (ovvero non ha estensione)
+RewriteRule ^([^\.]+)$ - [L,H=application/x-httpd-php]

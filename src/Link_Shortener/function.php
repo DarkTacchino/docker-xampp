@@ -2,7 +2,7 @@
 session_start();
 require_once '../includes/db.php';
 
-$changeMethod = 1;
+$changeMethod = 0;
 
 if($_SERVER['REQUEST_METHOD']==='POST')
 {
@@ -184,10 +184,10 @@ function renderLinkCard($link, $changeMethod)
     
     //Creazione URL
     if ($changeMethod == 0) {
-        $url = "https://$host/Link_Shortener/redirect.php?c={$shortLink}";
+        $url = "https://$host/Link_Shortener/redirect.php?c={$originalLink}";
         $linkType = "http://Link_Shortener.com/{$shortLink}";
     } else {
-        $url = "https://$host/Link_Shortener/$shortLink";
+        $url = "https://$host/Link_Shortener/$originalLink";
         $linkType = "http://Link_Shortener.com/{$shortLink}";
     }
     
