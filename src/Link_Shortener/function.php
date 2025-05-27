@@ -177,17 +177,18 @@ function getLinks($conn, $changeMethod)
 // Rendering della card per ogni link
 function renderLinkCard($link, $changeMethod)
 {
-    $host = "3000-idx-docker-xampp-1738490528241.cluster-6yqpn75caneccvva7hjo4uejgk.cloudworkstations.dev";
+        //$host = "3000-idx-docker-xampp-1738490528241.cluster-6yqpn75caneccvva7hjo4uejgk.cloudworkstations.dev";
+        $host = "3000-firebase-docker-xamppgit-1747641767696.cluster-oayqgyglpfgseqclbygurw4xd4.cloudworkstations.dev";
     $shortLink = $link['short_link'];
     $originalLink = $link['original_link'];
     $visits = $link['visits'];
     
     //Creazione URL
     if ($changeMethod == 0) {
-        $url = "https://$host/Link_Shortener/redirect.php?c={$originalLink}";
+        $url = "https://$host/Link_Shortener/redirect.php?c={$shortLink}";
         $linkType = "http://Link_Shortener.com/{$shortLink}";
     } else {
-        $url = "https://$host/Link_Shortener/$originalLink";
+        $url = "https://$host/Link_Shortener/$shortLink";
         $linkType = "http://Link_Shortener.com/{$shortLink}";
     }
     
