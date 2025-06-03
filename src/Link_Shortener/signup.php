@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../includes/db.php';
+$conn = dataLinkShort();
 
 $username = $_POST['username'];
 $email = $_POST['email'];

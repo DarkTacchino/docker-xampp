@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../includes/db.php'; // Connessione al database
+$conn = dataClassRoom();
 
 // Controlla se l'azione è 'getmessaggi' o 'invia'
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {

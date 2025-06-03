@@ -1,6 +1,7 @@
 <?php
 require_once '../includes/db.php';
 require_once __DIR__ . '/function.php';
+$conn = dataLinkShort();
 // Controlla se l'utente è loggato
 if (!isset($_SESSION["username"]) || !isset($_SESSION["user_id"])) 
 {

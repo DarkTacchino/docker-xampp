@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../includes/db.php';
+$conn = dataLinkShort();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verifica che i campi email e password siano presenti

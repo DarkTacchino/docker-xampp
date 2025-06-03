@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../includes/db.php'; //connessione al database
+$conn = dataClassRoom();
 $username = $_POST['username']; //Prendo i dati dal form
 $email = $_POST['email'];
 $password = $_POST['password'];

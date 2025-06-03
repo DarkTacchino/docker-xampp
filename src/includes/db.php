@@ -1,16 +1,34 @@
 <?php
+function dataClassRoom()
+{
+    $host = 'db';  
+    $dbname = 'chat_room'; 
+    
+    $user = 'user';
+    $password = 'user';
+    $port = 3306;
+    $conn = new mysqli($host, $user, $password, $dbname, $port);
 
-//presi dal docker-compose.yml
-$host = 'db'; 
-$dbname = 'link_shortener'; 
-//$dbname = 'chat_room'; 
-//$dbname = 'root_db'; 
-$user = 'user';
-$password = 'user';
-$port = 3306;
+    if ($conn->connect_error) 
+    {
+        die("Errore di connessione: " . $conn->connect_error);  
+    }  
+    return $conn; 
+}
 
-$conn = new mysqli($host, $user, $password, $dbname, $port);
+function dataLinkShort()
+{
+    $host = 'db';  
+    $dbname = 'link_shortener'; 
+    
+    $user = 'user';
+    $password = 'user';
+    $port = 3306;
+    $conn = new mysqli($host, $user, $password, $dbname, $port);
 
-if ($conn->connect_error) {
-    die("Errore di connessione: " . $conn->connect_error);
+    if ($conn->connect_error) 
+    {
+        die("Errore di connessione: " . $conn->connect_error);  
+    }  
+    return $conn; 
 }

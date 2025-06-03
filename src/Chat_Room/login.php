@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../includes/db.php'; //connessione al database
+$conn = dataClassRoom();
 //Controllo presenza parametri login
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {

@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 
 session_start();
 require_once '../includes/db.php'; // Connessione al databasephp 
+$conn = dataClassRoom();
 
 // Verifica se l'utente è loggato
 if (!isset($_SESSION['user_id'])) {

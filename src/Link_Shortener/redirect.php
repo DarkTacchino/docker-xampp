@@ -1,5 +1,6 @@
 <?php
 require_once '../includes/db.php';
+$conn = dataLinkShort();
 require_once __DIR__ . '/function.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once '../includes/db.php';
-
+$conn = dataLinkShort();
 $changeMethod = 0;
 
 if($_SERVER['REQUEST_METHOD']==='POST')
