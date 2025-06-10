@@ -63,25 +63,28 @@
         </section>
 
         <section id="hobby" class="content-section">
-            <h2 data-translate="hobbies_title">I Miei Hobby</h2>
-            <div class="hobby-grid">
-                <div class="hobby-item">
-                    <img src="https://via.placeholder.com/400x300?text=Tecnologia" alt="Tecnologia">
-                    <h3 data-translate="tech_hobby_title">Tecnologia</h3>
-                    <p data-translate="tech_hobby_text">Sono affascinato dal mondo della tecnologia, dalle ultime innovazioni software e hardware all'intelligenza artificiale e allo sviluppo web.</p>
-                </div>
-                <div class="hobby-item">
-                    <img src="https://via.placeholder.com/400x300?text=Macchine" alt="Macchine">
-                    <h3 data-translate="cars_hobby_title">Macchine</h3>
-                    <p data-translate="cars_hobby_text">Ho una grande passione per le automobili, il loro design, la loro ingegneria e le prestazioni. Mi piace mantenermi aggiornato sulle novità del settore.</p>
-                </div>
-                <div class="hobby-item">
-                    <img src="https://via.placeholder.com/400x300?text=Sport" alt="Sport">
-                    <h3 data-translate="sport_hobby_title">Sport</h3>
-                    <p data-translate="sport_hobby_text">Lo sport è una parte importante della mia vita, mi aiuta a mantenermi in forma e a scaricare lo stress. Apprezzo sia la pratica che l'osservazione di diverse discipline.</p>
-                </div>
+    <h2 data-translate="hobbies_title">I Miei Hobby</h2>
+    <div class="hobby-grid"> <div class="hobby-item hobby-tech"> <div class="hobby-content"> <h3 data-translate="tech_hobby_title">Tecnologia</h3>
+                <p data-translate="tech_hobby_text">Sono affascinato dal mondo della tecnologia, dalle ultime innovazioni software e hardware all'intelligenza artificiale e allo sviluppo web.</p>
             </div>
-        </section>
+        </div>
+
+        <div class="hobby-item hobby-cars">
+            <div class="hobby-content">
+                <h3 data-translate="cars_hobby_title">Macchine</h3>
+                <p data-translate="cars_hobby_text">Ho una grande passione per le automobili, il loro design, la loro ingegneria e le prestazioni. Mi piace mantenermi aggiornato sulle novità del settore.</p>
+            </div>
+        </div>
+
+        <div class="hobby-item hobby-sport">
+            <div class="hobby-content">
+                <h3 data-translate="sport_hobby_title">Sport</h3>
+                <p data-translate="sport_hobby_text">Lo sport è una parte importante della mia vita, mi aiuta a mantenermi in forma e a scaricare lo stress. Apprezzo sia la pratica che l'osservazione di diverse discipline.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
     </main>
 
     <footer>
