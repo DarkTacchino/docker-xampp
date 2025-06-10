@@ -3,9 +3,9 @@
   --primary-color: #007aff; /* Blu Apple */
   --secondary-color: #f5f5f7; /* Grigio chiaro di sfondo */
   --text-color: #1d1d1f; /* Testo scuro */
-  --light-text-color: #6e6e73; /* Testo grigio chiaro */
+  --light-text-color: #0a0a0a; /* Testo grigio chiaro */
   --white-color: #ffffff;
-  --border-color: #e0e0e0;
+  --border-color: #fffefe;
   --spacing-unit: 20px;
 }
 
@@ -19,7 +19,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   line-height: 1.6;
   color: var(--text-color);
-  background-color: var(--secondary-color);
+  background-color: var(--white-color);
   scroll-behavior: smooth; /* Scorrimento fluido per gli anchor link */
 }
 
@@ -122,7 +122,6 @@ nav {
   margin: var(--spacing-unit) auto;
   max-width: 1200px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 .content-section h2 {
@@ -133,11 +132,32 @@ nav {
   color: var(--text-color);
 }
 
-.content-section p {
-  font-size: 1.15em;
+/* Nuovo contenitore per l'immagine e il testo */
+.text-and-image-container {
+  display: flex; /* Attiva Flexbox */
+  align-items: flex-start; /* Allinea gli elementi in alto */
+  gap: 40px; /* Spazio tra l'immagine e il testo */
+  /* Potresti voler aggiungere un po' di margine inferiore se necessario */
   margin-bottom: var(--spacing-unit);
+}
+
+.text-and-image-container img { /* Seleziona l'immagine all'interno del nuovo contenitore */
+  max-width: 50%; /* Mantiene la larghezza che avevi definito */
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  flex-shrink: 0; /* Impedisce all'immagine di restringersi */
+  /* Rimuovi il margin-top se non vuoi spazio sopra l'immagine all'interno del flexbox */
+  margin-top: 10px;
+}
+
+/* Seleziona il paragrafo all'interno del nuovo contenitore */
+.text-and-image-container p {
+  font-size: 1.15em;
+  margin-bottom: var(--spacing-unit); /* Questo margine si applica tra i paragrafi se ce ne fossero di più, o alla fine del blocco di testo */
   line-height: 1.8;
   color: var(--light-text-color);
+  flex-grow: 1; /* Permette al testo di occupare lo spazio rimanente */
 }
 
 /* Stili specifici per la sezione PCTO */

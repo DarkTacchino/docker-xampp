@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
             'en': 'Who Am I'
         },
         'who_am_i_description': {
-            'it': 'Sono Luciano Arsene, studente del 5CM, appassionato di tecnologia e sempre desideroso di imparare cose nuove. Questo sito è il racconto del mio percorso e delle mie esperienze.',
-            'en': 'I am Luciano Arsene, a 5CM student, passionate about technology and always eager to learn new things. This website is the story of my journey and experiences.'
+            'it': 'Mi chiamo Luciano Arsene e sono uno studente del 5CM, entusiasta di condividere con voi un po\' del mio percorso e delle mie passioni. Sono profondamente appassionato di tecnologia e, come molti di voi, sono sempre alla ricerca di nuove conoscenze e sfide da affrontare.\nQuesto portfolio digitale che ho creato è molto più di una semplice raccolta di lavori: è il racconto della mia crescita, delle mie esperienze e del mio costante desiderio di imparare. Spero che esplorandolo possiate cogliere l\'impegno e la curiosità che mi guidano ogni giorno.',
+            'en': 'My name is Luciano Arsene, and I am a 5CM student, excited to share a bit about my journey and my passions with you. I am deeply passionate about technology and, like many of you, I am always seeking new knowledge and challenges to embrace.\nThis digital portfolio I\'ve created is much more than just a collection of works: it\'s the story of my growth, my experiences, and my continuous desire to learn. I hope that as you explore it, you\'ll see the dedication and curiosity that drive me every day.'
         },
         'pcto_title': {
             'it': 'Percorso per le Competenze Trasversali e l\'Orientamento (PCTO)',
