@@ -1,227 +1,325 @@
-/* Stili Generali */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif; /* Scegli un font sans-serif pulito */
-  background-color: #000; /* Sfondo nero di base */
-  color: #fff;
-  overflow-x: hidden; /* Evita scroll orizzontale */
+/* Stili globali e reset */
+:root {
+  --primary-color: #007aff; /* Blu Apple */
+  --secondary-color: #f5f5f7; /* Grigio chiaro di sfondo */
+  --text-color: #1d1d1f; /* Testo scuro */
+  --light-text-color: #6e6e73; /* Testo grigio chiaro */
+  --white-color: #ffffff;
+  --border-color: #e0e0e0;
+  --spacing-unit: 20px;
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-/* Barra di Navigazione Superiore (Logo Rockstar) */
-.top-navbar {
-  position: absolute; /* o fixed se vuoi che rimanga sempre visibile */
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-  opacity: 0;
-  animation: fadeIn 1s ease-out 0.5s forwards;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+  scroll-behavior: smooth; /* Scorrimento fluido per gli anchor link */
 }
 
-.rockstar-logo-top {
-  width: 100px; /* Adatta la dimensione secondo il tuo logo */
-  height: auto;
-  filter: invert(1) brightness(2); /* Rende il logo SVG bianco se è nero */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-/* Sezione Eroe */
-.hero-section {
-  height: 100vh; /* Occupa l'intera altezza della finestra */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative; /* Necessario per posizionare elementi figli in modo assoluto */
-  overflow: hidden; /* Nasconde parti delle palme che escono */
-  text-align: center;
+a:hover {
+  color: #005bb5; /* Blu più scuro al passaggio del mouse */
 }
 
-.hero-background {
-  position: absolute;
+/* Header e Navigazione */
+header {
+  background-color: var(--white-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-unit) 0;
+  position: sticky; /* Rende l'header fisso quando si scorre */
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Esempio di gradiente ispirato a Vice City / GTA VI */
-  background: linear-gradient(to bottom, #ff7e5f, #feb47b, #e1306c, #9a1f5c, #4a0e3a);
-  /* In alternativa, un'immagine di sfondo:
-  background-image: url('path/to/your/sky-background.jpg');
-  background-size: cover;
-  background-position: center;
-  */
-  z-index: 1;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-/* Palme Laterali */
-.palm-tree {
-  position: absolute;
-  bottom: 0;
-  height: 85vh; /* Altezza delle palme, adattala */
-  width: auto;
-  z-index: 3; /* Sopra lo sfondo, sotto il contenuto principale se necessario */
-  opacity: 0; /* Per animazione di entrata */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-unit);
 }
 
-.left-palm {
-  left: -5%; /* Posizionamento, adattalo */
-  animation: slideInFromLeft 1.5s ease-out 0.8s forwards;
+.logo a {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: var(--text-color);
 }
 
-.right-palm {
-  right: -5%; /* Posizionamento, adattalo */
-  transform: scaleX(-1); /* Specchia l'immagine orizzontalmente */
-  animation: slideInFromRight 1.5s ease-out 1s forwards;
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: var(--spacing-unit);
 }
 
-/* Contenuto Principale della Sezione Eroe */
+.nav-links li a {
+  font-weight: 500;
+  font-size: 1.1em;
+  padding: 5px 10px;
+}
+
+.lang-switcher button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.lang-switcher button:hover {
+  background-color: #005bb5;
+}
+
+/* Sezione Hero (benvenuto) */
+#hero {
+  background: linear-gradient(to right, #eef0f4, #dbe4f1); /* Sfumatura leggera */
+  color: var(--text-color);
+  text-align: center;
+  padding: 100px var(--spacing-unit);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px; /* Altezza minima per la sezione */
+}
+
 .hero-content {
-  position: relative; /* Per stare sopra lo sfondo e le palme */
-  z-index: 5;
+  max-width: 800px;
+}
+
+#hero h1 {
+  font-size: 3.5em;
+  margin-bottom: var(--spacing-unit);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+#hero p {
+  font-size: 1.5em;
+  color: var(--light-text-color);
+}
+
+/* Sezioni di Contenuto Generiche */
+.content-section {
+  background-color: var(--white-color);
+  padding: 80px var(--spacing-unit);
+  margin: var(--spacing-unit) auto;
+  max-width: 1200px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.content-section h2 {
+  font-size: 2.5em;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 60px;
+  color: var(--text-color);
+}
+
+.content-section p {
+  font-size: 1.15em;
+  margin-bottom: var(--spacing-unit);
+  line-height: 1.8;
+  color: var(--light-text-color);
+}
+
+/* Stili specifici per la sezione PCTO */
+.pcto-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.pcto-card {
+  background-color: var(--secondary-color);
+  padding: var(--spacing-unit);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
-  opacity: 0; /* Per animazione di entrata */
-  animation: fadeInScaleUp 1.5s ease-out 1.2s forwards;
-  padding: 0 20px; /* Aggiunto padding per evitare che il contenuto tocchi i bordi su schermi piccoli */
+  text-align: center;
 }
 
-.game-main-logo {
-  width: 90%; /* Responsive, occupa il 90% del contenitore .hero-content */
-  max-width: 650px; /* Limite massimo per schermi grandi */
+.pcto-card h3 {
+  font-size: 1.8em;
+  margin-bottom: var(--spacing-unit);
+  color: var(--text-color);
+}
+
+.pcto-card p {
+  font-size: 1em;
+  color: var(--light-text-color);
+  margin-bottom: var(--spacing-unit);
+}
+
+.pcto-card img {
+  max-width: 100%;
   height: auto;
-  margin-bottom: 25px;
+  border-radius: 8px;
+  margin-top: var(--spacing-unit);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.release-date {
-  font-size: 1.8em; /* Adatta la dimensione */
-  font-weight: bold;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 30px;
-  color: #f0f0f0;
-  text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+.pcto-personal-notes {
+  margin-top: 40px;
+  background-color: var(--secondary-color);
+  padding: var(--spacing-unit) * 1.5;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  text-align: center;
 }
 
-.trailer-button {
-  display: inline-block;
-  padding: 12px 28px;
-  background-color: rgba(255, 255, 255, 0.15); /* Sfondo semi-trasparente */
-  border: 2px solid #fff;
-  color: #fff;
-  text-decoration: none;
+.pcto-personal-notes h3 {
+  font-size: 1.8em;
+  margin-bottom: var(--spacing-unit);
+  color: var(--text-color);
+}
+
+.pcto-personal-notes p {
   font-size: 1.1em;
-  font-weight: bold;
-  border-radius: 5px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  color: var(--light-text-color);
 }
 
-.trailer-button:hover {
-  background-color: #fff;
-  color: #000;
-  transform: scale(1.05);
+/* Stili specifici per la sezione Hobby */
+.hobby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
 }
 
-/* Animazioni CSS Semplici */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.hobby-item {
+  background-color: var(--secondary-color);
+  padding: var(--spacing-unit);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@keyframes fadeInScaleUp {
-  from {
-      opacity: 0;
-      transform: scale(0.9);
-  }
-  to {
-      opacity: 1;
-      transform: scale(1);
-  }
+.hobby-item img {
+  max-width: 100%;
+  height: 200px; /* Altezza fissa per le immagini degli hobby */
+  object-fit: cover; /* Assicura che l'immagine copra l'area senza distorsioni */
+  border-radius: 8px;
+  margin-bottom: var(--spacing-unit);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-@keyframes slideInFromLeft {
-  from {
-      opacity: 0;
-      transform: translateX(-100px);
-  }
-  to {
-      opacity: 1;
-      transform: translateX(0);
-  }
+.hobby-item h3 {
+  font-size: 1.6em;
+  margin-bottom: 10px;
+  color: var(--text-color);
 }
 
-@keyframes slideInFromRight {
-  from {
-      opacity: 0;
-      transform: translateX(100px);
-  }
-  to {
-      opacity: 1;
-      transform: translateX(0);
-  }
+.hobby-item p {
+  font-size: 1em;
+  color: var(--light-text-color);
 }
 
-/* Media Queries per la responsività (Esempio base) */
+/* Footer */
+footer {
+  text-align: center;
+  padding: var(--spacing-unit);
+  background-color: var(--white-color);
+  color: var(--light-text-color);
+  font-size: 0.9em;
+  border-top: 1px solid var(--border-color);
+  margin-top: 40px;
+}
+
+/* Media Queries per la responsività */
 @media (max-width: 768px) {
-  .rockstar-logo-top {
-      width: 80px;
-      top: 15px;
+  nav {
+      flex-direction: column;
+      gap: 15px;
   }
 
-  .game-main-logo {
-      max-width: 80%; /* Logo più piccolo su schermi medi */
-      min-width: 280px; /* Assicura una dimensione minima leggibile */
-  }
-  
-  .release-date {
-      font-size: 1.5em;
+  .nav-links {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
   }
 
-  .trailer-button {
-      padding: 10px 20px;
-      font-size: 1em;
+  #hero h1 {
+      font-size: 2.5em;
   }
 
-  .palm-tree {
-      height: 70vh; /* Palme leggermente più piccole */
+  #hero p {
+      font-size: 1.2em;
   }
-  .left-palm { left: -15%; }
-  .right-palm { right: -15%; }
+
+  .content-section {
+      padding: 60px var(--spacing-unit);
+  }
+
+  .content-section h2 {
+      font-size: 2em;
+      margin-bottom: 40px;
+  }
+
+  .pcto-overview, .hobby-grid {
+      grid-template-columns: 1fr; /* Una colonna su schermi piccoli */
+  }
 }
 
 @media (max-width: 480px) {
-  .rockstar-logo-top {
-      width: 60px;
-      top: 10px;
-  }
-  
-  .game-main-logo {
-      max-width: 90%; 
-      min-width: 250px;
-  }
-  
-  .release-date {
-      font-size: 1.2em;
-      margin-bottom: 20px;
+  .logo a {
+      font-size: 1.5em;
   }
 
-  .trailer-button {
-      padding: 8px 15px;
-      font-size: 0.9em;
+  .nav-links li a {
+      font-size: 1em;
   }
 
-  .palm-tree {
-      height: 60vh;
-       /* Su schermi molto piccoli, potresti voler nascondere le palme 
-          o ridurle/posizionarle drasticamente
-       display: none;
-      */
+  .lang-switcher button {
+      padding: 6px 12px;
+      font-size: 0.8em;
   }
-  .left-palm { left: -25%; } 
-  .right-palm { right: -25%; }
+
+  #hero h1 {
+      font-size: 2em;
+  }
+
+  #hero p {
+      font-size: 1em;
+  }
+
+  .content-section {
+      padding: 40px 15px;
+      margin: 15px auto;
+  }
+
+  .content-section h2 {
+      font-size: 1.8em;
+      margin-bottom: 30px;
+  }
+
+  .pcto-card h3, .pcto-personal-notes h3, .hobby-item h3 {
+      font-size: 1.5em;
+  }
+
+  .content-section p, .pcto-card p, .hobby-item p {
+      font-size: 0.95em;
+  }
 }

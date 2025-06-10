@@ -3,46 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Mio Sito - Stile GTA VI</title>
+    <title>Luciano Arsene - Portfolio Maturità</title>
     <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="icon" href="https://www.apple.com/favicon.ico" type="image/x-icon"> </head>
 <body>
-
-    <!-- Barra di navigazione superiore (logo Rockstar) -->
-    <header class="top-navbar">
-        <!-- ATTENZIONE: Sostituire con immagine locale per il progetto finale! -->
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Rockstar_Games_Logo.svg/800px-Rockstar_Games_Logo.svg.png" alt="Rockstar Logo" class="rockstar-logo-top">
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#">Luciano Arsene</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#chi-sono" data-translate="who_am_i">Chi Sono</a></li>
+                <li><a href="#pcto" data-translate="pcto">PCTO</a></li>
+                <li><a href="#hobby" data-translate="hobbies">Hobby</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <button id="translate-btn" data-lang="en">EN / IT</button>
+            </div>
+        </nav>
     </header>
 
-    <!-- Sezione Eroe (Prima Sezione) -->
-    <section class="hero-section">
-        <div class="hero-background">
-            <!-- Lo sfondo (gradiente o immagine) sarà applicato via CSS -->
-        </div>
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h1 data-translate="welcome_title">Benvenuto nel mio Portfolio!</h1>
+                <p data-translate="welcome_text">Esplora il mio percorso e le mie passioni.</p>
+            </div>
+        </section>
 
-        <!-- Palme laterali -->
-        <!-- ATTENZIONE: Sostituire con immagine locale per il progetto finale! -->
-        <img src="https://www.transparentpng.com/thumb/palm-tree/black-palm-tree-png-image-wTEHkP.png" alt="Palma sinistra" class="palm-tree left-palm">
-        <!-- ATTENZIONE: Sostituire con immagine locale per il progetto finale! -->
-        <img src="https://www.transparentpng.com/thumb/palm-tree/black-palm-tree-png-image-wTEHkP.png" alt="Palma destra" class="palm-tree right-palm">
+        <section id="chi-sono" class="content-section">
+            <h2 data-translate="who_am_i_title">Chi Sono</h2>
+            <p data-translate="who_am_i_description">Sono Luciano Arsene, studente del 5CM, appassionato di tecnologia e sempre desideroso di imparare cose nuove. Questo sito è il racconto del mio percorso e delle mie esperienze.</p>
+        </section>
 
-        <!-- Contenuto principale della sezione Eroe -->
-        <div class="hero-content">
-            <!-- ATTENZIONE: Sostituire con immagine locale per il progetto finale! -->
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Grand_Theft_Auto_VI_logo.svg/1280px-Grand_Theft_Auto_VI_logo.svg.png" alt="Grand Theft Auto VI Logo" class="game-main-logo">
-            
-            <p class="release-date">COMING 2025</p>
-            <a href="#trailer" class="trailer-button">WATCH TRAILER 1</a>
-        </div>
-    </section>
+        <section id="pcto" class="content-section">
+            <h2 data-translate="pcto_title">Percorso per le Competenze Trasversali e l'Orientamento (PCTO)</h2>
+            <div class="pcto-overview">
+                <div class="pcto-card">
+                    <h3 data-translate="pcto_period_1_title">Primo Periodo: Maggio - Giugno</h3>
+                    <p data-translate="pcto_period_1_text">Il mio percorso PCTO si è svolto in due periodi : dal 21 maggio al 9 giugno e, successivamente, dal 12 al 22 settembre. Ho svolto il tirocinio presso l'azienda Fileni , un'importante realtà italiana del settore alimentare, leader nella produzione di carne e pollame biologici, con sede a Cingoli (MC).</p>
+                    <p data-translate="pcto_period_1_details">Sono stato inserito nel reparto assistenza informatica , sotto la supervisione del mio tutor aziendale Massimiliano. Durante il primo periodo, mi sono occupato della configurazione di tre PC destinati a nuovi dipendenti, imparando l'importanza della precisione, della metodologia e del rispetto delle procedure aziendali. Inoltre, ho installato Windows 11 sul mio computer personale, migliorando la mia conoscenza del sistema operativo e delle sue funzionalità. Ho avuto anche l'opportunità di accedere alla sala server , esperienza utile per comprendere come funziona un'infrastruttura informatica in un contesto aziendale reale.</p>
+                    <img src="https://via.placeholder.com/600x400?text=Immagine+PCTO+Periodo+1" alt="Fileni edificio">
+                </div>
+                <div class="pcto-card">
+                    <h3 data-translate="pcto_period_2_title">Secondo Periodo: Settembre</h3>
+                    <p data-translate="pcto_period_2_text">Nel secondo periodo, le mie attività si sono concentrate maggiormente sul lavoro con i database. In particolare, ho utilizzato SQL per creare e gestire un database di prova, esercitandomi in vista delle attività scolastiche. Questo mi ha permesso di unire la teoria appresa in classe con un contesto pratico, rendendo più chiaro il valore della gestione dei dati nel mondo del lavoro.</p>
+                    <img src="https://via.placeholder.com/600x400?text=Immagine+PCTO+Periodo+2" alt="Database">
+                </div>
+            </div>
+            <div class="pcto-personal-notes">
+                <h3 data-translate="personal_notes_title">Osservazioni Personali e Difficoltà</h3>
+                <p data-translate="personal_notes_text">L'esperienza è stata molto formativa sia dal punto di vista tecnico che personale. Ho potuto osservare da vicino il funzionamento di un'azienda strutturata e conoscere il lavoro di squadra, l'importanza della puntualità, della comunicazione e dell'adattamento. Tuttavia, ho incontrato alcune difficoltà logistiche. Ogni mattina dovevo prendere due corriere per arrivare: una per Cingoli e un'altra per Jesi, con un'attesa di circa un'ora prima dell'inizio dell'orario lavorativo. Inoltre, gli odori provenienti dalla zona produttiva, dove si lavora carne e pollo fritto, non erano sempre piacevoli. Nonostante le piccole difficoltà, considero il mio PCTO estremamente positivo. Ho consolidato competenze tecniche apprese a scuola, ne ho acquisite di nuove e ho vissuto un'esperienza concreta di lavoro. Questo percorso mi ha fatto crescere sia a livello professionale che personale, confermando il mio interesse per il settore informatico e l'importanza del continuo apprendimento.</p>
+                <img src="https://via.placeholder.com/600x400?text=Immagine+Mensa+Aziendale" alt="Mensa aziendale Fileni">
+            </div>
+        </section>
 
-    <!-- Qui puoi aggiungere altre sezioni del tuo sito -->
-    <!-- 
-    <section class="another-section">
-        <h2>Altra Sezione</h2>
-        <p>Contenuto...</p>
-    </section>
-    -->
+        <section id="hobby" class="content-section">
+            <h2 data-translate="hobbies_title">I Miei Hobby</h2>
+            <div class="hobby-grid">
+                <div class="hobby-item">
+                    <img src="https://via.placeholder.com/400x300?text=Tecnologia" alt="Tecnologia">
+                    <h3 data-translate="tech_hobby_title">Tecnologia</h3>
+                    <p data-translate="tech_hobby_text">Sono affascinato dal mondo della tecnologia, dalle ultime innovazioni software e hardware all'intelligenza artificiale e allo sviluppo web.</p>
+                </div>
+                <div class="hobby-item">
+                    <img src="https://via.placeholder.com/400x300?text=Macchine" alt="Macchine">
+                    <h3 data-translate="cars_hobby_title">Macchine</h3>
+                    <p data-translate="cars_hobby_text">Ho una grande passione per le automobili, il loro design, la loro ingegneria e le prestazioni. Mi piace mantenermi aggiornato sulle novità del settore.</p>
+                </div>
+                <div class="hobby-item">
+                    <img src="https://via.placeholder.com/400x300?text=Sport" alt="Sport">
+                    <h3 data-translate="sport_hobby_title">Sport</h3>
+                    <p data-translate="sport_hobby_text">Lo sport è una parte importante della mia vita, mi aiuta a mantenermi in forma e a scaricare lo stress. Apprezzo sia la pratica che l'osservazione di diverse discipline.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
+    <footer>
+        <p data-translate="footer_text">&copy; 2025 Luciano Arsene. Tutti i diritti riservati.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
