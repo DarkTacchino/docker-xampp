@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 /* Stili globali e reset */
 :root {
-  --primary-color: #007aff; /* Blu Apple */
-  --secondary-color: #f5f5f7; /* Grigio chiaro di sfondo */
-  --text-color: #1d1d1f; /* Testo scuro */
-  --light-text-color: #3c3c43; /* Testo grigio leggibile (era #0a0a0a che è quasi nero) */
+  --primary-color: #007aff;
+  --secondary-color: #f5f5f7;
+  --text-color: #1d1d1f;
+  --light-text-color: #3c3c43;
   --white-color: #ffffff;
-  --border-color: #e0e0e0; /* Leggermente scurito per maggiore visibilità */
+  --border-color: #e0e0e0;
   --spacing-unit: 20px;
 }
 
@@ -16,11 +18,40 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  line-height: 1.6;
+  font-family: "DM Sans", sans-serif;
   color: var(--text-color);
-  background-color: var(--white-color); /* Sfondo del body bianco per unire le sezioni */
-  scroll-behavior: smooth;
+  background-color: var(--white-color);
+  overflow-x: hidden;
+  scroll-behavior: smooth; /* Mantenuto per la navigazione tramite link */
+}
+
+/* FIX: Stile per nascondere la "striscia bianca" (scrollbar) e renderla più elegante */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 6rem;
+  font-weight: 700;
+  letter-spacing: -0.2rem;
+  line-height: 0.8;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7;
+  color: var(--light-text-color);
 }
 
 a {
@@ -28,20 +59,24 @@ a {
   text-decoration: none;
   transition: color 0.3s ease;
 }
-
 a:hover {
   color: #005bb5;
 }
 
-/* Header e Navigazione */
+/* Header e Navigazione (Stile migliorato come richiesto) */
 header {
-  background-color: var(--white-color);
-  border-bottom: 1px solid var(--border-color);
-  padding: var(--spacing-unit) 0;
-  position: sticky;
+  position: fixed; /* Fisso in alto per un look moderno */
   top: 0;
+  left: 0;
+  width: 100%;
+  padding: var(--spacing-unit) 0;
   z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  /* Effetto vetro semi-trasparente */
+  background-color: rgba(22, 22, 23, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Bordo sottile per separazione */
+  transition: background-color 0.3s ease;
 }
 
 nav {
@@ -56,7 +91,7 @@ nav {
 .logo a {
   font-size: 1.8em;
   font-weight: 700;
-  color: var(--text-color);
+  color: var(--white-color); /* Testo bianco per contrasto */
 }
 
 .nav-links {
@@ -64,11 +99,14 @@ nav {
   display: flex;
   gap: var(--spacing-unit);
 }
-
 .nav-links li a {
   font-weight: 500;
   font-size: 1.1em;
   padding: 5px 10px;
+  color: rgba(255, 255, 255, 0.8); /* Link chiari ma non troppo accesi */
+}
+.nav-links li a:hover {
+    color: var(--white-color);
 }
 
 .lang-switcher button {
@@ -78,68 +116,113 @@ nav {
   padding: 8px 15px;
   border-radius: 20px;
   cursor: pointer;
-  font-size: 0.9em;
   font-weight: 600;
   transition: background-color 0.3s ease;
 }
-
 .lang-switcher button:hover {
   background-color: #005bb5;
 }
 
-/* Sezione Hero (benvenuto) */
-#hero {
-  background: linear-gradient(to right, #eef0f4, #dbe4f1);
-  color: var(--text-color);
-  text-align: center;
-  padding: 100px var(--spacing-unit);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 750px;
+/* Sezione Hero */
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #111117;
+  overflow: hidden;
 }
 
-.hero-content {
-  max-width: 800px;
+.hero-img-container,
+.hero-img-container img,
+.fade-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
 }
 
-#hero h1 {
-  font-size: 3.5em;
-  margin-bottom: var(--spacing-unit);
-  font-weight: 700;
-  line-height: 1.2;
+/* NUOVA REGOLA CORRETTA per style.css */
+.hero-img-logo img {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 450px; /* Ridotto per una dimensione più gestibile */
+  max-width: 90%; /* Assicura che non esca mai dallo schermo */
+  height: auto;
+  object-fit: contain;
 }
 
-#hero p {
-  font-size: 1.5em;
-  color: var(--light-text-color);
+.hero-img-copy {
+  position: absolute;
+  bottom: 20%; left: 50%;
+  transform: translate(-50%, 0);
+  will-change: opacity;
+  color: white;
+}
+.hero-img-copy p {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  line-height: 1;
+  color: inherit;
 }
 
-/* Sezioni di Contenuto Generiche */
-/* All'interno della sezione "Sezioni di Contenuto Generiche" */
+.fade-overlay {
+  background-color: #fff;
+  will-change: opacity;
+}
+
+.overlay {
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: center 15%;
+  width: 100%; height: 200%;
+  z-index: 1;
+}
+
+/* NUOVA REGOLA CORRETTA per style.css */
+.logo-container {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Dimensioni modificate per rispecchiare le proporzioni del tuo logo */
+  width: 350px;
+  height: 100px; 
+  z-index: 2;
+  pointer-events: none;
+}
+
+.overlay-copy {
+  position: absolute;
+  bottom: 25%; left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 2;
+}
+
+.overlay-copy h1 {
+  background: var(--text-color);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  transform-origin: center 0%;
+}
+
+/* Contenitore per il resto della pagina per gestire lo scroll */
+.page-content {
+    background-color: var(--white-color);
+    position: relative;
+    z-index: 5;
+}
+
 .content-section {
-  background-color: var(--white-color);
-  padding: 80px var(--spacing-unit); /* Mantieni il padding verticale */
+  padding: 80px var(--spacing-unit);
   margin: 0 auto;
-  max-width: 1200px; /* Limita la larghezza massima del contenuto normale */
-  border-radius: 12px;
+  max-width: 1200px;
 }
-
-/* NUOVE REGOLE PER LA SEZIONE HOBBY A TUTTA LARGHEZZA */
-#hobby.content-section {
-  max-width: 100vw; /* Rimuovi il limite di larghezza e occupa il 100% della viewport width */
-  width: 100%; /* Assicura che si estenda pienamente */
-  padding-left: 0;   /* Rimuovi il padding interno a sinistra */
-  padding-right: 0;  /* Rimuovi il padding interno a destra */
-  border-radius: 0;  /* Rimuovi i bordi arrotondati se vuoi che si estenda a bordo */
-  /* Puoi mantenere padding-top e padding-bottom esistenti */
-}
-
-/* Spazio tra le sezioni (con sfondo uniforme) */
 .content-section:not(:last-child) {
     margin-bottom: var(--spacing-unit);
 }
-
 .content-section h2 {
   font-size: 2.5em;
   font-weight: 700;
@@ -147,29 +230,20 @@ nav {
   margin-bottom: 60px;
   color: var(--text-color);
 }
-
-/* Contenitore per l'immagine e il testo (sezione Chi Sono) */
 .text-and-image-container {
   display: flex;
   align-items: flex-start;
   gap: 40px;
   margin-bottom: var(--spacing-unit);
 }
-
 .text-and-image-container img {
   max-width: 50%;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   flex-shrink: 0;
-  margin-top: 10px;
 }
-
 .text-and-image-container p {
-  font-size: 1.15em;
-  margin-bottom: var(--spacing-unit);
-  line-height: 1.8;
-  color: var(--light-text-color);
   flex-grow: 1;
 }
 
@@ -180,7 +254,6 @@ nav {
   gap: 40px;
   margin-bottom: 60px;
 }
-
 .pcto-card {
   background-color: var(--secondary-color);
   padding: var(--spacing-unit);
@@ -191,19 +264,14 @@ nav {
   align-items: center;
   text-align: center;
 }
-
 .pcto-card h3 {
   font-size: 1.8em;
   margin-bottom: var(--spacing-unit);
   color: var(--text-color);
 }
-
 .pcto-card p {
-  font-size: 1em;
-  color: var(--light-text-color);
   margin-bottom: var(--spacing-unit);
 }
-
 .pcto-card img {
   max-width: 100%;
   height: auto;
@@ -211,7 +279,6 @@ nav {
   margin-top: var(--spacing-unit);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
 .pcto-personal-notes {
   margin-top: 40px;
   background-color: var(--secondary-color);
@@ -219,62 +286,52 @@ nav {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   text-align: center;
+  width: 100%;
 }
-
 .pcto-personal-notes h3 {
   font-size: 1.8em;
   margin-bottom: var(--spacing-unit);
   color: var(--text-color);
 }
 
-.pcto-personal-notes p {
-  font-size: 1.1em;
-  color: var(--light-text-color);
-}
-
 /* Stili specifici per la sezione Hobby */
+#hobby.content-section {
+  max-width: 100vw;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 0;
+}
 .hobby-grid {
   display: flex;
   flex-direction: column;
-  gap: 0px; /* Ho riportato il gap a 40px per uno spazio più coerente tra gli elementi */
-  /* Rimosso max-width e margin: 0 auto; per permettere al grid di occupare tutta la larghezza del contenitore */
+  gap: 0;
 }
-
 .hobby-item {
   position: relative;
   background-color: var(--secondary-color);
   height: 750px;
-  border-radius: 1px;
-  box-shadow: 0 px 10px rgba(0,0,0,0.1);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
-
-/* Stili per l'immagine/video di sfondo (usando GIF come esempio) */
 .hobby-item::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.7;
-  z-index: 1; /* Fondamentale per la sovrapposizione */
+  z-index: 1;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
-
-/* Effetto al passaggio del mouse sull'immagine di sfondo */
 .hobby-item:hover::before {
   opacity: 0.9;
   transform: scale(1.03);
 }
-
 .hobby-item .hobby-content {
   position: relative;
   z-index: 2;
@@ -282,34 +339,21 @@ nav {
   padding: var(--spacing-unit);
   text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
-
 .hobby-item h3 {
-  font-size: 2em;
-  margin-bottom: 10px;
+  font-size: 2.2em;
+  margin-bottom: 15px;
   color: inherit;
 }
-
 .hobby-item p {
-  font-size: 1.1em;
+  font-size: 1.2em;
   color: inherit;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.hobby-item img {
-  display: none; /* Nascondi l'immagine se la gestisci come background CSS */
-}
-
-/* Assegna le GIF di sfondo a ciascun hobby-item */
-.hobby-tech::before {
-  background-image: url('images/tesla.gif'); /* Sostituisci con il tuo percorso */
-}
-
-.hobby-cars::before {
-  background-image: url('images/bmw.gif'); /* Sostituisci con il tuo percorso */
-}
-
-.hobby-sport::before {
-  background-image: url('images/palestra.gif'); /* Sostituisci con il tuo percorso */
-}
+.hobby-tech::before   { background-image: url('images/tesla.gif'); }
+.hobby-cars::before   { background-image: url('images/bmw.gif'); }
+.hobby-sport::before  { background-image: url('images/palestra.gif'); }
 
 /* Footer */
 footer {
@@ -320,102 +364,28 @@ footer {
   font-size: 0.9em;
   border-top: 1px solid var(--border-color);
   margin-top: 60px;
-  width: 100%; /* Assicura che occupi il 100% della larghezza */
-  max-width: none; /* Rimuove qualsiasi limite di larghezza */
-  margin-left: 0; /* Assicura che non ci siano margini laterali indesiderati */
-  margin-right: 0;
 }
 
 /* Media Queries per la responsività */
 @media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    gap: 15px;
-  }
-
+  h1 { font-size: 3.5rem; }
+  nav { flex-direction: column; gap: 15px; }
   .nav-links {
     flex-direction: column;
+    width: 100%;
+    align-items: center;
     gap: 10px;
-    text-align: center;
   }
-
-  #hero h1 {
-    font-size: 2.5em;
-  }
-
-  #hero p {
-    font-size: 1.2em;
-  }
-
-  .content-section {
-    padding: 60px var(--spacing-unit);
-  }
-
-  .content-section h2 {
-    font-size: 2em;
-    margin-bottom: 40px;
-  }
-
-  .pcto-overview {
-    grid-template-columns: 1fr; /* Una colonna per PCTO su schermi piccoli */
-  }
-
-  .hobby-grid {
-    /* Per hobby-grid che è già display: flex; flex-direction: column;,
-       la regola grid-template-columns: 1fr; non ha effetto diretto.
-       Se vuoi che i singoli hobby-item vadano a tutta larghezza (e non solo 800px),
-       questa media query non è il posto dove limitare la larghezza del hobby-grid.
-       Per farli andare a tutta larghezza del contenitore (1200px), il max-width va rimosso dal .hobby-grid principale.
-       Qui semplicemente ci assicuriamo che vada al 100% dello spazio disponibile. */
-    max-width: 100%; /* Permetti al hobby-grid di occupare più spazio su mobile */
-  }
-
-  .hobby-item {
-    height: 300px; /* Altezza leggermente ridotta su schermi più piccoli */
-  }
+  .content-section h2 { font-size: 2em; }
+  .text-and-image-container { flex-direction: column; align-items: center; }
+  .text-and-image-container img { max-width: 80%; }
+  .hobby-item { height: 500px; }
 }
 
 @media (max-width: 480px) {
-  .logo a {
-    font-size: 1.5em;
-  }
-
-  .nav-links li a {
-    font-size: 1em;
-  }
-
-  .lang-switcher button {
-    padding: 6px 12px;
-    font-size: 0.8em;
-  }
-
-  #hero h1 {
-    font-size: 2em;
-  }
-
-  #hero p {
-    font-size: 1em;
-  }
-
-  .content-section {
-    padding: 40px 15px;
-    margin: 15px auto;
-  }
-
-  .content-section h2 {
-    font-size: 1.8em;
-    margin-bottom: 30px;
-  }
-
-  .pcto-card h3, .pcto-personal-notes h3, .hobby-item h3 {
-    font-size: 1.5em;
-  }
-
-  .content-section p, .pcto-card p, .hobby-item p {
-    font-size: 0.95em;
-  }
-
-  .hobby-item {
-    height: 250px; /* Ulteriore riduzione su schermi molto piccoli */
-  }
+  h1 { font-size: 2.5rem; }
+  .content-section h2 { font-size: 1.8em; }
+  .pcto-card h3, .hobby-item h3 { font-size: 1.5em; }
+  p { font-size: 1em; }
+  .hobby-item { height: 400px; }
 }

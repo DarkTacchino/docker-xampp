@@ -6,5 +6,5 @@
     //header("Location: examples/test_ws.html");
     //header("Location: Tesina/front_tesina.php");
     //header("Location: Verifica/login.html");
-    header("Location: Tesina_Vr2/presentazione.php");
+    header("Location: Tesina_Vr2/presentazione.html");
 ?>
