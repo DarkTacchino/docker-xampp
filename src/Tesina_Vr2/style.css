@@ -127,6 +127,7 @@ nav {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  
 }
 
 .hero p {
@@ -143,6 +144,7 @@ text-transform: uppercase;
   height: 100svh;
   background-color: #111117;
   overflow: hidden;
+  z-index: 0;
 }
 
 .hero-img-container,
@@ -151,6 +153,7 @@ text-transform: uppercase;
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
   object-fit: cover;
+  
 } 
 
 /* NUOVA REGOLA CORRETTA per style.css */
@@ -163,6 +166,8 @@ text-transform: uppercase;
    height: auto;
   object-fit: contain;
 }
+
+
 
 .hero-img-copy {
   position: absolute;
@@ -182,20 +187,33 @@ text-transform: uppercase;
 }
 
 .overlay {
-  position: absolute;
-  top: 0; left: 0;
-  transform-origin: center 15%;
-  width: 100%; height: 200%;
-  z-index: 1;
+  position: absolute; /* Posizionamento assoluto rispetto al suo contenitore posizionato */
+  top: 0; /* Allinea il bordo superiore dell'elemento al bordo superiore del contenitore */
+  left: 0; /* Allinea il bordo sinistro dell'elemento al bordo sinistro del contenitore */
+  transform-origin: center 15%; /* Imposta il punto di origine per le trasformazioni (es. scale, rotate) al centro orizzontale e al 15% dall'alto verticalmente */
+  width: 100%; /* Occupa il 100% della larghezza del suo contenitore */
+  height: 200%; /* Occupa il 200% dell'altezza del suo contenitore, probabilmente per permettere lo scorrimento o effetti visivi */
+  z-index: 1; /* Imposta l'ordine di impilamento dell'elemento. Valori più alti appaiono sopra. */
 }
 
+.logo-container {
+  position: fixed; /* Posizionamento fisso rispetto alla finestra del browser, rimane visibile anche durante lo scorrimento */
+  top: 30.7%; /* Il bordo superiore dell'elemento è al 30% dall'alto della finestra */
+  left: 50.0%; /* Il bordo sinistro dell'elemento è al 50% dalla sinistra della finestra */
+  transform: translate(-50%, -50%); /* Centra l'elemento orizzontalmente e verticalmente (sposta l'elemento del 50% della sua larghezza a sinistra e del 50% della sua altezza in alto) */
+  width: 100px; /* Larghezza fissa di 100 pixel */
+  height: 150px; /* Altezza fissa di 150 pixel */
+  z-index: 2; /* Imposta l'ordine di impilamento dell'elemento */
+}
 
 .overlay-copy {
-  position: absolute;
-  bottom: 25%; left: 50%;
-  transform: translate(-50%, 0%);
-  z-index: 2;
+  position: absolute; /* Posizionamento assoluto rispetto al suo contenitore posizionato */
+  bottom: 25%; /* Il bordo inferiore dell'elemento è al 25% dal basso del suo contenitore */
+  left: 50%; /* Il bordo sinistro dell'elemento è al 50% dalla sinistra del suo contenitore */
+  transform: translate(-50%, 0%); /* Centra l'elemento orizzontalmente (sposta l'elemento del 50% della sua larghezza a sinistra) */
+  z-index: 2; /* Imposta l'ordine di impilamento dell'elemento */
 }
+
 
 
 .overlay-copy h1 {
@@ -204,7 +222,8 @@ text-transform: uppercase;
   -webkit-text-fill-color: transparent;
   color: transparent;
   transform-origin: center 0%;
-} /*
+  display: inline-block;
+} 
 
 /* Contenitore per il resto della pagina per gestire lo scroll */
 .page-content {
