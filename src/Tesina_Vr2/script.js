@@ -87,15 +87,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
         gsap.set(overlayCopy, {
           opacity: overlayCopyRevealProgress,
-          scale: overlayCopyScale,
-          background: `linear-gradient(to bottom, 
-            #111117 0%, 
-            #111117 ${gradientTopPosition}%, 
-            #e66461 ${gradientBottomPosition}%, 
+          scale:  overlayCopyScale,
+        
+          // GRADIENTE: modifica solo background-image, non shorthand “background”
+          backgroundImage: `linear-gradient(to bottom,
+            #111117 0%,
+            #111117 ${gradientTopPosition}%,
+            #e66461 ${gradientBottomPosition}%,
             #e66461 100%)`,
-          backgroundClip: "text",
+        
+          // Assicuriamo inline anche i ritagli e la trasparenza
+          backgroundClip:       "text",
           webkitBackgroundClip: "text",
+          mozBackgroundClip:    "text",
+        
+          webkitTextFillColor:  "transparent",
+          mozTextFillColor:     "transparent"
         });
+        
       } else if (scrollProgress <= 0.6) {
         // Nasconde il testo prima che inizi la sua animazione
         gsap.set(overlayCopy, { opacity: 0 });
